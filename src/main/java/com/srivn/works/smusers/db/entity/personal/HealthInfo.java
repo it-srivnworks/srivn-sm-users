@@ -1,5 +1,7 @@
 package com.srivn.works.smusers.db.entity.personal;
 
+import java.io.Serializable;
+
 import com.srivn.works.smusers.db.entity.users.UserInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,7 +23,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "HEALTH_INFO")
-public class HealthInfo {
+public class HealthInfo implements Serializable{
 
 	@Id
     @Column(name = "userID")
@@ -37,4 +40,12 @@ public class HealthInfo {
     @MapsId
     @JoinColumn(name = "userID")
     private UserInfoEn userInfoEn;
+
+	@Builder
+	public HealthInfo(ClsnValEn bloodGroup, String notes) {
+		super();
+		this.bloodGroup = bloodGroup;
+		this.notes = notes;
+	}
+	
 }

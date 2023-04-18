@@ -45,12 +45,14 @@ spring:
     username: sa
     password: sa
     driverClassName: org.h2.Driver
+  sql:
+  init.mode: always
   h2:
   console:
   enabled: true
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
       enable_lazy_load_no_trans : true
       event:
           merge:

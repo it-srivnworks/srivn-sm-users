@@ -1,5 +1,8 @@
 package com.srivn.works.smusers.db.entity.users;
 
+import java.io.Serializable;
+import java.sql.Date;
+
 import com.srivn.works.smusers.db.entity.personal.AddressInfo;
 import com.srivn.works.smusers.db.entity.personal.ContactInfo;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
@@ -8,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,8 +21,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "TEACHERS")
-public class TeacherInfoEn extends UserInfoEn{
-
+public class TeacherInfoEn extends UserInfoEn {
 	@ManyToOne
 	@JoinColumn(name = "contactInfo")
 	private ContactInfo contactInfo;
@@ -34,4 +37,16 @@ public class TeacherInfoEn extends UserInfoEn{
 	@ManyToOne
 	@JoinColumn(name = "title")
 	private ClsnValEn title;
+
+	@Builder
+	public TeacherInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType,
+			ContactInfo contactInfo, AddressInfo addressInfo, ClsnValEn dept, ClsnValEn title) {
+		super(firstName, lastName, userGender, userDOB, userType);
+		this.contactInfo = contactInfo;
+		this.addressInfo = addressInfo;
+		this.dept = dept;
+		this.title = title;
+	}
+
+	
 }

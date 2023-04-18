@@ -4,6 +4,7 @@ package com.srivn.works.smusers.db.entity.users;
 
 import java.sql.Date;
 
+import com.srivn.works.smusers.db.entity.personal.AddressInfo;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 import jakarta.persistence.CascadeType;
@@ -18,6 +19,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -53,5 +55,14 @@ public abstract class UserInfoEn {
 	@OneToOne(mappedBy = "userInfoEn", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserLoginInfoEn userLoginInfo;
-	
+
+	public UserInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userGender = userGender;
+		this.userDOB = userDOB;
+		this.userType = userType;
+	}
+
 }

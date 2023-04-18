@@ -1,5 +1,7 @@
 package com.srivn.works.smusers.controls;
 
+import java.sql.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.services.UserAdminService;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -27,4 +30,8 @@ public class UsersControl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UsersControl.class);
 
+	@GetMapping(value = "/addNewGuardianInfo", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void addNewGuardianInfo() {
+		userAdminService.addNewGuardianInfo();
+	}
 }

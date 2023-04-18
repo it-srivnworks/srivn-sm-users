@@ -4,6 +4,10 @@ package com.srivn.works.smusers.db.entity.personal;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.io.Serializable;
+import java.sql.Date;
+
+import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 import jakarta.persistence.Column;
@@ -12,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,7 +26,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "ADDRESS")
-public class AddressInfo {
+public class AddressInfo implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,10 +53,10 @@ public class AddressInfo {
 	@Column(name = "zipCode")
 	private String zipCode;
 
-	public AddressInfo(int addressID, String houseNumber, String street, String city, String state, ClsnValEn country,
+	@Builder
+	public AddressInfo(String houseNumber, String street, String city, String state, ClsnValEn country,
 			String zipCode) {
 		super();
-		this.addressID = addressID;
 		this.houseNumber = houseNumber;
 		this.street = street;
 		this.city = city;

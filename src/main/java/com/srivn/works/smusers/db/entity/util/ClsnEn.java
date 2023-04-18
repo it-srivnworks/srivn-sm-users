@@ -14,14 +14,20 @@ import jakarta.persistence.*;
 public class ClsnEn {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "clsnid")
 	private int clsnID;
 	
 	@Column(name = "clsnKey")
-	private String key;
+	private String clsnKey;
 	
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    @JoinColumn(name = "clsnid")
-    private List<ClsnValEn> ClsnVals;
+	public ClsnEn() {
+		super();
+	}
+	
+	public ClsnEn(int clsnID, String clsnKey) {
+		super();
+		this.clsnID = clsnID;
+		this.clsnKey = clsnKey;
+	}
+    
 }

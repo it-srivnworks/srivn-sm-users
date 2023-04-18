@@ -2,7 +2,11 @@ package com.srivn.works.smusers.db.entity.users;
 
 import jakarta.persistence.Table;
 
+import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
+
+import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,12 +24,8 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "USERSLOGIN")
-public class UserLoginInfoEn {
+public class UserLoginInfoEn implements Serializable{
 
-	@Id
-    @Column(name = "userID")
-    private int id;
-	
 	@Column(name = "userEmail")
 	private String userEmail;
 	
@@ -37,9 +38,23 @@ public class UserLoginInfoEn {
 	@Column(name = "currentstatus")
 	private int currentStatus;
 
+	@Id
 	@OneToOne
     @MapsId
     @JoinColumn(name = "userID")
     private UserInfoEn userInfoEn;
 
+	@Builder
+	public UserLoginInfoEn(String userEmail, String userPassword, Timestamp lastLogin, int currentStatus,
+			UserInfoEn userInfoEn) {
+		super();
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+		this.lastLogin = lastLogin;
+		this.currentStatus = currentStatus;
+		this.userInfoEn = userInfoEn;
+	}
+
+
+	
 }
