@@ -35,7 +35,7 @@ public abstract class UserInfoEn {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userID")
 	private int userID;
-
+	
 	@Column(name = "firstName")
 	private String firstName;
 
@@ -52,17 +52,18 @@ public abstract class UserInfoEn {
 	@JoinColumn(name = "userType")
 	private ClsnValEn userType;
 
-	@OneToOne(mappedBy = "userInfoEn", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userEmail" , referencedColumnName = "userEmail")
     private UserLoginInfoEn userLoginInfo;
 
-	public UserInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType) {
+	public UserInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType, UserLoginInfoEn userLoginInfo) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userGender = userGender;
 		this.userDOB = userDOB;
 		this.userType = userType;
+		this.userLoginInfo = userLoginInfo;
 	}
 
 }

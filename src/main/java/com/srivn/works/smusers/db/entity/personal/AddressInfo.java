@@ -1,6 +1,5 @@
 package com.srivn.works.smusers.db.entity.personal;
 
-
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
@@ -26,30 +25,29 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "ADDRESS")
-public class AddressInfo implements Serializable{
+public class AddressInfo implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "addressID")
 	private int addressID;
-	
+
 	@Column(name = "houseNumber")
 	private String houseNumber;
 
 	@Column(name = "street")
 	private String street;
-	
+
 	@Column(name = "city")
 	private String city;
-	
+
 	@Column(name = "state")
 	private String state;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "country")
 	private ClsnValEn country;
 
-	
 	@Column(name = "zipCode")
 	private String zipCode;
 

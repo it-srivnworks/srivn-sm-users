@@ -39,14 +39,15 @@ public class StaffInfoEn extends UserInfoEn {
 	@JoinColumn(name = "title")
 	private ClsnValEn title;
 
-	@Builder
 	public StaffInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType,
-			ContactInfo contactInfo, AddressInfo addressInfo, ClsnValEn dept, ClsnValEn title) {
-		super(firstName, lastName, userGender, userDOB, userType);
+			UserLoginInfoEn userLoginInfo, ContactInfo contactInfo, AddressInfo addressInfo,
+			ClsnValEn dept, ClsnValEn title) {
+		super(firstName, lastName, userGender, userDOB, userType, userLoginInfo);
 		this.contactInfo = contactInfo;
 		this.addressInfo = addressInfo;
 		this.dept = dept;
 		this.title = title;
 	}
+
 
 }

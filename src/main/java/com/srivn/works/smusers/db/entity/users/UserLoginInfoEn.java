@@ -10,6 +10,8 @@ import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
@@ -26,6 +28,7 @@ import lombok.ToString;
 @Table(name = "USERSLOGIN")
 public class UserLoginInfoEn implements Serializable{
 
+	@Id
 	@Column(name = "userEmail")
 	private String userEmail;
 	
@@ -38,23 +41,15 @@ public class UserLoginInfoEn implements Serializable{
 	@Column(name = "currentstatus")
 	private int currentStatus;
 
-	@Id
-	@OneToOne
-    @MapsId
-    @JoinColumn(name = "userID")
+	@OneToOne(mappedBy = "userLoginInfo")
     private UserInfoEn userInfoEn;
 
-	@Builder
-	public UserLoginInfoEn(String userEmail, String userPassword, Timestamp lastLogin, int currentStatus,
-			UserInfoEn userInfoEn) {
+	public UserLoginInfoEn(String userEmail, String userPassword, Timestamp lastLogin, int currentStatus) {
 		super();
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
 		this.lastLogin = lastLogin;
 		this.currentStatus = currentStatus;
-		this.userInfoEn = userInfoEn;
 	}
 
-
-	
 }

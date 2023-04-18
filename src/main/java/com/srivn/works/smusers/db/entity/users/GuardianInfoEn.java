@@ -17,8 +17,10 @@ import lombok.ToString;
 @Table(name = "GUARDIANS")
 public class GuardianInfoEn extends UserInfoEn {
 
-	public GuardianInfoEn(String firstName, String lastName,int userGender,Date userDOB,ClsnValEn userType) {
-		super(firstName, lastName, userGender, userDOB, userType);
+	public GuardianInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType,
+			UserLoginInfoEn userLoginInfo) {
+		super(firstName, lastName, userGender, userDOB, userType, userLoginInfo);
+		// TODO Auto-generated constructor stub
 	}
 
 }

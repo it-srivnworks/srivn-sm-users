@@ -48,11 +48,10 @@ public class StudentInfoEn extends UserInfoEn {
 	@JoinColumn(name = "sguardian")
 	private GuardianInfoEn sguardian;
 
-	@Builder
 	public StudentInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType,
-			ContactInfo contactInfo, ContactInfo emergencyContact, AddressInfo addressInfo, HealthInfo healthInfo,
-			GuardianInfoEn pguardian, GuardianInfoEn sguardian) {
-		super(firstName, lastName, userGender, userDOB, userType);
+			UserLoginInfoEn userLoginInfo, ContactInfo contactInfo, ContactInfo emergencyContact,
+			AddressInfo addressInfo, HealthInfo healthInfo, GuardianInfoEn pguardian, GuardianInfoEn sguardian) {
+		super(firstName, lastName, userGender, userDOB, userType, userLoginInfo);
 		this.contactInfo = contactInfo;
 		this.emergencyContact = emergencyContact;
 		this.addressInfo = addressInfo;
@@ -61,6 +60,6 @@ public class StudentInfoEn extends UserInfoEn {
 		this.sguardian = sguardian;
 	}
 
-	
+
 
 }

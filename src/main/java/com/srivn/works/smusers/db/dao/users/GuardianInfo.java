@@ -18,5 +18,6 @@ public class GuardianInfo {
 	private int userGender;
 	private String userDOB;
 	private String userType;
+	private String userEmail;
 	
 }

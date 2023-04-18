@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.srivn.works.smusers.db.dao.users.GuardianInfo;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.services.UserAdminService;
 
@@ -30,8 +31,8 @@ public class UsersControl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UsersControl.class);
 
-	@GetMapping(value = "/addNewGuardianInfo", produces = MediaType.APPLICATION_JSON_VALUE)
-	public void addNewGuardianInfo() {
-		userAdminService.addNewGuardianInfo();
+	@PostMapping(value = "/addNewGuardianInfo", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void addNewGuardianInfo(@RequestBody GuardianInfo gInfo) {
+		userAdminService.addNewGuardianInfo(gInfo);
 	}
 }
