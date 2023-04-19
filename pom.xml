@@ -52,6 +52,20 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--Adding EhCache For Entity-->
+		<!--https://www.baeldung.com/hibernate-second-level-cache-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jcache</artifactId>
+			<version>6.1.7.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>3.6.3</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!--Adding EhCache For Entity-->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>

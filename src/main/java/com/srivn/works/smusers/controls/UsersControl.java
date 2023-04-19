@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.srivn.works.smusers.db.dao.users.GuardianInfo;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
+import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.services.UserAdminService;
 
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UsersControl {
 
 	
@@ -31,8 +32,12 @@ public class UsersControl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UsersControl.class);
 
-	@PostMapping(value = "/addNewGuardianInfo", produces = MediaType.APPLICATION_JSON_VALUE)
-	public void addNewGuardianInfo(@RequestBody GuardianInfo gInfo) {
-		userAdminService.addNewGuardianInfo(gInfo);
+	@PostMapping(value = "/guardian/", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> addNewGuardianInfo(@RequestBody GuardianInfo gInfo) {
+		try {
+			return new ResponseEntity<>(userAdminService.addNewGuardianInfo(gInfo), HttpStatus.OK);
+		} catch (SMException sme) {
+			return new ResponseEntity<>(sme, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

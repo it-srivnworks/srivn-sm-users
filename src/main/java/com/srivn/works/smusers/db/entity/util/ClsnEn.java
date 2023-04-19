@@ -3,13 +3,20 @@ package com.srivn.works.smusers.db.entity.util;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.cache.annotation.Cacheable;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Getter
 @Setter
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "CLSN")
 public class ClsnEn {
 
