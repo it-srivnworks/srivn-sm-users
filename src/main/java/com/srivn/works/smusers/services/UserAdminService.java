@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.srivn.works.smusers.db.dao.users.GuardianInfo;
@@ -24,6 +25,10 @@ import com.srivn.works.smusers.exception.SMMessage;
 import com.srivn.works.smusers.util.AppC;
 import com.srivn.works.smusers.util.AppMsg;
 import com.srivn.works.smusers.util.AppUtil;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,17 +43,23 @@ public class UserAdminService {
 	private final GuardianInfoRepo grRepo;
 
 	private final UserInfoRepo uiRepo;
+	
+	private final UserLoginInfoRepo ulRepo;
 
+	private final DataTransactionService dataTransactionS;
+	
 	private final CustomGuardianInfoMapper cGuiInfoMapper;
 	private final CustomUserInfoMapper cUrInfoMapper;
 
+	
+	
 	public SMMessage addNewGuardianInfo(GuardianInfo gInfo) {
 		try {
-			if (uiRepo.checkUserEmail(gInfo.getUserEmail()) == 0) {
+			if (ulRepo.checkUserEmail(gInfo.getUserEmail()) == 0) {
 				GuardianInfoEn en = cGuiInfoMapper.DTOToEn(gInfo);
 				UserLoginInfoEn ulEn = new UserLoginInfoEn(gInfo.getUserEmail(), AppUtil.generatePwd(),
 						Timestamp.from(Instant.now()), AppC.Status.NEW.getCode());
-				grRepo.save(en);
+				dataTransactionS.addUserDetailsAndLogin(en, ulEn);
 				return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
 						.message(AppMsg.Msg.MSG_ADD_001.getMsg()).build();
 			} else {
@@ -63,6 +74,9 @@ public class UserAdminService {
 		}
 	}
 
+	
+
+	 
 	/*Heavy query due to JPA JOIN on all user child tables*/
 	public List<UserInfo> getUserInfoAll() {
 		List<UserInfo> uiList = uiRepo.findAll().stream().map(en -> {
@@ -85,7 +99,7 @@ public class UserAdminService {
 	}
 
 	public SMMessage checkIfEmailExist(String userEmail) {
-		if (uiRepo.checkUserEmail(userEmail) > 0) {
+		if (ulRepo.checkUserEmail(userEmail) > 0) {
 			return SMMessage.builder().appCode(AppMsg.Msg.MSG_EXIST_002.getCode())
 					.message(AppMsg.Msg.MSG_EXIST_002.getMsg()).build();
 		} else {

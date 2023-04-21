@@ -48,7 +48,7 @@ public class UsersAdminControl {
 			return new ResponseEntity<>(userAdminService.getGuardianInfoAll(), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/{userEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/guardian/{userEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getGuardianInfobyEmail(@PathVariable String userEmail) {
 			return new ResponseEntity<>(userAdminService.getGuardianInfobyEmail(userEmail), HttpStatus.OK);
 	}
