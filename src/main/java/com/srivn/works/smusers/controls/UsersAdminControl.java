@@ -39,6 +39,11 @@ public class UsersAdminControl {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getUserInfoAll() {
+			return new ResponseEntity<>(userAdminService.getUserInfoAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/guardian/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getGuardianInfoAll() {
 			return new ResponseEntity<>(userAdminService.getGuardianInfoAll(), HttpStatus.OK);
 	}

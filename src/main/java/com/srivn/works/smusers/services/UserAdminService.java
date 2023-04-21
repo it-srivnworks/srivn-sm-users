@@ -8,12 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.srivn.works.smusers.db.dao.users.GuardianInfo;
 import com.srivn.works.smusers.db.dao.users.UserInfo;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.db.entity.users.UserInfoEn;
 import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
 import com.srivn.works.smusers.db.mappers.CustomGuardianInfoMapper;
+import com.srivn.works.smusers.db.mappers.CustomUserInfoMapper;
 import com.srivn.works.smusers.db.repo.GuardianInfoRepo;
 import com.srivn.works.smusers.db.repo.UserInfoRepo;
 import com.srivn.works.smusers.db.repo.UserLoginInfoRepo;
@@ -35,13 +37,14 @@ public class UserAdminService {
 
 	private final GuardianInfoRepo grRepo;
 
-	private final UserLoginInfoRepo ulRepo;
+	private final UserInfoRepo uiRepo;
 
 	private final CustomGuardianInfoMapper cGuiInfoMapper;
+	private final CustomUserInfoMapper cUrInfoMapper;
 
 	public SMMessage addNewGuardianInfo(GuardianInfo gInfo) {
 		try {
-			if (ulRepo.checkUserEmail(gInfo.getUserEmail()) == 0) {
+			if (uiRepo.checkUserEmail(gInfo.getUserEmail()) == 0) {
 				GuardianInfoEn en = cGuiInfoMapper.DTOToEn(gInfo);
 				UserLoginInfoEn ulEn = new UserLoginInfoEn(gInfo.getUserEmail(), AppUtil.generatePwd(),
 						Timestamp.from(Instant.now()), AppC.Status.NEW.getCode());
@@ -60,6 +63,15 @@ public class UserAdminService {
 		}
 	}
 
+	/*Heavy query due to JPA JOIN on all user child tables*/
+	public List<UserInfo> getUserInfoAll() {
+		List<UserInfo> uiList = uiRepo.findAll().stream().map(en -> {
+			return cUrInfoMapper.EnToDTO(en);
+		}).collect(Collectors.toList());
+		return uiList;
+
+	}
+
 	public List<GuardianInfo> getGuardianInfoAll() {
 		List<GuardianInfo> uiList = grRepo.findAll().stream().map(en -> {
 			return cGuiInfoMapper.EnToDTO(en);
@@ -71,9 +83,9 @@ public class UserAdminService {
 	public GuardianInfo getGuardianInfobyEmail(String userEmail) {
 		return cGuiInfoMapper.EnToDTO(grRepo.findByUserEmail(userEmail));
 	}
-	
+
 	public SMMessage checkIfEmailExist(String userEmail) {
-		if (ulRepo.checkUserEmail(userEmail) > 0) {
+		if (uiRepo.checkUserEmail(userEmail) > 0) {
 			return SMMessage.builder().appCode(AppMsg.Msg.MSG_EXIST_002.getCode())
 					.message(AppMsg.Msg.MSG_EXIST_002.getMsg()).build();
 		} else {
