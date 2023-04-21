@@ -1,6 +1,7 @@
 package com.srivn.works.smusers.db.entity.users;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
@@ -17,9 +18,14 @@ import lombok.ToString;
 @Table(name = "GUARDIANS")
 public class GuardianInfoEn extends UserInfoEn {
 
-	public GuardianInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType,
+	public GuardianInfoEn() {
+		super();
+	}
+	
+		
+	public GuardianInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
 			UserLoginInfoEn userLoginInfo) {
-		super(firstName, lastName, userGender, userDOB, userType, userLoginInfo);
+		super(firstName, lastName, gender, userDOB, userType, userLoginInfo);
 		// TODO Auto-generated constructor stub
 	}
 

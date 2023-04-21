@@ -3,6 +3,7 @@ package com.srivn.works.smusers.db.entity.users;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.srivn.works.smusers.db.entity.personal.AddressInfo;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
@@ -42,11 +43,11 @@ public abstract class UserInfoEn {
 	@Column(name = "lastName")
 	private String lastName;
 
-	@Column(name = "userGender")
-	private int userGender;
+	@Column(name = "gender")
+	private int gender;
 
 	@Column(name = "userDOB")
-	private Date userDOB;
+	private Timestamp userDOB;
 
 	@ManyToOne
 	@JoinColumn(name = "userType")
@@ -56,11 +57,15 @@ public abstract class UserInfoEn {
     @JoinColumn(name = "userEmail" , referencedColumnName = "userEmail")
     private UserLoginInfoEn userLoginInfo;
 
-	public UserInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType, UserLoginInfoEn userLoginInfo) {
+	public UserInfoEn() {
+		super();
+	}
+	
+	public UserInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType, UserLoginInfoEn userLoginInfo) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.userGender = userGender;
+		this.gender = gender;
 		this.userDOB = userDOB;
 		this.userType = userType;
 		this.userLoginInfo = userLoginInfo;

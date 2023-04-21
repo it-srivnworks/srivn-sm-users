@@ -44,6 +44,10 @@ public class UserLoginInfoEn implements Serializable{
 	@OneToOne(mappedBy = "userLoginInfo")
     private UserInfoEn userInfoEn;
 
+	public UserLoginInfoEn() {
+		super();
+	}
+	
 	public UserLoginInfoEn(String userEmail, String userPassword, Timestamp lastLogin, int currentStatus) {
 		super();
 		this.userEmail = userEmail;

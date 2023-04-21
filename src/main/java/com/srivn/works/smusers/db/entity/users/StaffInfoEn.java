@@ -2,6 +2,7 @@ package com.srivn.works.smusers.db.entity.users;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.srivn.works.smusers.db.entity.personal.AddressInfo;
 import com.srivn.works.smusers.db.entity.personal.ContactInfo;
@@ -39,10 +40,10 @@ public class StaffInfoEn extends UserInfoEn {
 	@JoinColumn(name = "title")
 	private ClsnValEn title;
 
-	public StaffInfoEn(String firstName, String lastName, int userGender, Date userDOB, ClsnValEn userType,
+	public StaffInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
 			UserLoginInfoEn userLoginInfo, ContactInfo contactInfo, AddressInfo addressInfo,
 			ClsnValEn dept, ClsnValEn title) {
-		super(firstName, lastName, userGender, userDOB, userType, userLoginInfo);
+		super(firstName, lastName, gender, userDOB, userType, userLoginInfo);
 		this.contactInfo = contactInfo;
 		this.addressInfo = addressInfo;
 		this.dept = dept;

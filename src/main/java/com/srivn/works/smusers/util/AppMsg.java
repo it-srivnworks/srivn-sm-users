@@ -33,8 +33,9 @@ public class AppMsg {
 
 	public enum Msg {
 		MSG_OK_000("OK", "Howdy!"),
-		MSG_ADD_001("ADDED", "Data Saved succesfully");
-
+		MSG_ADD_001("ADDED", "Data Saved succesfully"),
+		MSG_EXIST_002("EXIST", "Data Exist");
+		
 		private final String code;
 		private final String msg;
 

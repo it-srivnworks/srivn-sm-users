@@ -9,15 +9,15 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-public class GuardianInfo {
+public class GuardianInfo extends UserInfo {
 
-	private String firstName;
-	private String lastName;
-	private int userGender;
-	private String userDOB;
-	private String userType;
-	private String userEmail;
+	public GuardianInfo() {
+		super();
+	}
 	
+	public GuardianInfo(String firstName, String lastName, String gender, String userDOB, String userType,
+			String userEmail) {
+		super(firstName, lastName, gender, userDOB, userType, userEmail);
+	}
+
 }
