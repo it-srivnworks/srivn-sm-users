@@ -10,6 +10,5 @@ import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 
 public interface GuardianInfoRepo extends JpaRepository<GuardianInfoEn, Integer>{
 	
-	@Query("SELECT GI FROM GuardianInfoEn  GI WHERE GI.userLoginInfo.userEmail = :userEmail")
-	GuardianInfoEn getUsergetByUserEmail(@Param("userEmail") String userEmail);
+	public GuardianInfoEn findByUserEmail(String userEmail);
 }

@@ -41,9 +41,6 @@ public class UserLoginInfoEn implements Serializable{
 	@Column(name = "currentstatus")
 	private int currentStatus;
 
-	@OneToOne(mappedBy = "userLoginInfo")
-    private UserInfoEn userInfoEn;
-
 	public UserLoginInfoEn() {
 		super();
 	}

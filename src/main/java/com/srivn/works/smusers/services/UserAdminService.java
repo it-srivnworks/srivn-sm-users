@@ -45,7 +45,6 @@ public class UserAdminService {
 				GuardianInfoEn en = cGuiInfoMapper.DTOToEn(gInfo);
 				UserLoginInfoEn ulEn = new UserLoginInfoEn(gInfo.getUserEmail(), AppUtil.generatePwd(),
 						Timestamp.from(Instant.now()), AppC.Status.NEW.getCode());
-				en.setUserLoginInfo(ulEn);
 				grRepo.save(en);
 				return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
 						.message(AppMsg.Msg.MSG_ADD_001.getMsg()).build();
@@ -70,7 +69,7 @@ public class UserAdminService {
 	}
 
 	public GuardianInfo getGuardianInfobyEmail(String userEmail) {
-		return cGuiInfoMapper.EnToDTO(grRepo.getUsergetByUserEmail(userEmail));
+		return cGuiInfoMapper.EnToDTO(grRepo.findByUserEmail(userEmail));
 	}
 	
 	public SMMessage checkIfEmailExist(String userEmail) {

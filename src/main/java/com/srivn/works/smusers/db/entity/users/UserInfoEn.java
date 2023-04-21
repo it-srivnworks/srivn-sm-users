@@ -1,7 +1,5 @@
 package com.srivn.works.smusers.db.entity.users;
 
-
-
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -22,6 +20,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -29,6 +28,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class UserInfoEn {
 
@@ -36,7 +36,7 @@ public abstract class UserInfoEn {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userID")
 	private int userID;
-	
+
 	@Column(name = "firstName")
 	private String firstName;
 
@@ -53,22 +53,18 @@ public abstract class UserInfoEn {
 	@JoinColumn(name = "userType")
 	private ClsnValEn userType;
 
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userEmail" , referencedColumnName = "userEmail")
-    private UserLoginInfoEn userLoginInfo;
+	@Column(name = "userEmail")
+	private String userEmail;
 
-	public UserInfoEn() {
-		super();
-	}
-	
-	public UserInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType, UserLoginInfoEn userLoginInfo) {
+	public UserInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
+			String userEmail) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.userDOB = userDOB;
 		this.userType = userType;
-		this.userLoginInfo = userLoginInfo;
+		this.userEmail = userEmail;
 	}
 
 }

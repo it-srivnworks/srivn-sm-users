@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -21,6 +22,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "STAFF")
 public class StaffInfoEn extends UserInfoEn {
 
@@ -31,24 +33,22 @@ public class StaffInfoEn extends UserInfoEn {
 	@ManyToOne
 	@JoinColumn(name = "addressInfo")
 	private AddressInfo addressInfo;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "dept")
 	private ClsnValEn dept;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "title")
 	private ClsnValEn title;
 
 	public StaffInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
-			UserLoginInfoEn userLoginInfo, ContactInfo contactInfo, AddressInfo addressInfo,
-			ClsnValEn dept, ClsnValEn title) {
-		super(firstName, lastName, gender, userDOB, userType, userLoginInfo);
+			String userEmail, ContactInfo contactInfo, AddressInfo addressInfo, ClsnValEn dept, ClsnValEn title) {
+		super(firstName, lastName, gender, userDOB, userType, userEmail);
 		this.contactInfo = contactInfo;
 		this.addressInfo = addressInfo;
 		this.dept = dept;
 		this.title = title;
 	}
-
 
 }

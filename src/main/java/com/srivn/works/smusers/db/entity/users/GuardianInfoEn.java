@@ -7,7 +7,9 @@ import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -15,17 +17,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "GUARDIANS")
 public class GuardianInfoEn extends UserInfoEn {
-
-	public GuardianInfoEn() {
-		super();
-	}
-	
-		
 	public GuardianInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
-			UserLoginInfoEn userLoginInfo) {
-		super(firstName, lastName, gender, userDOB, userType, userLoginInfo);
+			String userEmail) {
+		super(firstName, lastName, gender, userDOB, userType, userEmail);
 		// TODO Auto-generated constructor stub
 	}
 

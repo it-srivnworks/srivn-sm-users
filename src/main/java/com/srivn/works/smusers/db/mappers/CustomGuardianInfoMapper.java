@@ -21,7 +21,6 @@ public class CustomGuardianInfoMapper {
 		GuardianInfo dto = bookInfoMapper.EnToDTO(en);
 		dto.setUserDOB(en.getUserDOB().toString().substring(0, 10));
 		dto.setUserType(en.getUserType().getValue());
-		dto.setUserEmail(en.getUserLoginInfo().getUserEmail());
 		return dto;
 	}
 	
