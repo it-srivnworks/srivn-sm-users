@@ -15,19 +15,24 @@ public class CustomGuardianInfoMapper {
 
 	private final ClsnValRepo clsnValRepo;
 	
-	GuardianInfoMapper giInfoMapper = Mappers.getMapper(GuardianInfoMapper.class);
-	
 	public GuardianInfo EnToDTO(GuardianInfoEn en) {
-		GuardianInfo dto = giInfoMapper.EnToDTO(en);
+		GuardianInfo dto = GuardianInfoMapper.INSTANCE.EnToDTO(en);
 		dto.setUserDOB(en.getUserDOB().toString().substring(0, 10));
 		dto.setUserType(en.getUserType().getValue());
 		return dto;
 	}
 	
 	public GuardianInfoEn DTOToEn(GuardianInfo dto) {
-		GuardianInfoEn en = giInfoMapper.DTOToEn(dto);
+		GuardianInfoEn en = GuardianInfoMapper.INSTANCE.DTOToEn(dto);
 		en.setUserDOB(Timestamp.valueOf(dto.getUserDOB()+AppC.TS_DEF));
 		en.setUserType(clsnValRepo.findByValue(dto.getUserType()));
 		return en;
+	}
+	
+	public GuardianInfoEn DTOToUpdateEn(GuardianInfo dto,GuardianInfoEn en) {
+		GuardianInfoEn enU = GuardianInfoMapper.INSTANCE.DTOToUpdateEn(dto,en);
+		enU.setUserDOB(Timestamp.valueOf(dto.getUserDOB()+AppC.TS_DEF));
+		enU.setUserType(clsnValRepo.findByValue(dto.getUserType()));
+		return enU;
 	}
 }

@@ -75,7 +75,27 @@ public class UserAdminService {
 	}
 
 	
+	public SMMessage updateGuardianInfo(String userEmail, GuardianInfo gInfo) {
+		try {
+			UserLoginInfoEn ulEn = ulRepo.findByUserEmail(userEmail);
+			if (ulEn != null) {
+				GuardianInfoEn en = grRepo.findByUserEmail(userEmail);
+				en = cGuiInfoMapper.DTOToUpdateEn(gInfo,en);
+				ulEn.setLastLogin(Timestamp.from(Instant.now())); 		
+				dataTransactionS.addUserDetailsAndLogin(en, ulEn);						
+				return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
+						.message(AppMsg.Msg.MSG_ADD_001.getMsg()).build();
+			} else {
+				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(),
+						AppMsg.Err.ERR__DNF_001.getMsgWithParam("userEmail"));
+			}
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
 
+		}
+	}
 	 
 	/*Heavy query due to JPA JOIN on all user child tables*/
 	public List<UserInfo> getUserInfoAll() {

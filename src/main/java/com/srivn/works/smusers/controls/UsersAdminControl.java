@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,11 @@ public class UsersAdminControl {
 	@PostMapping(value = "/guardian/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addNewGuardianInfo(@RequestBody GuardianInfo gInfo) {
 			return new ResponseEntity<>(userAdminService.addNewGuardianInfo(gInfo), HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/guardian/{userEmail}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateGuardianInfo(@PathVariable String userEmail, @RequestBody GuardianInfo gInfo) {
+			return new ResponseEntity<>(userAdminService.updateGuardianInfo(userEmail, gInfo), HttpStatus.OK);
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

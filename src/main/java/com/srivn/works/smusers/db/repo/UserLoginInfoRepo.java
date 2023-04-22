@@ -10,4 +10,6 @@ public interface UserLoginInfoRepo extends JpaRepository<UserLoginInfoEn, Intege
 
 	@Query("SELECT COUNT(*) FROM UserLoginInfoEn  UL WHERE UL.userEmail = :userEmail")
 	int checkUserEmail(@Param("userEmail") String userEmail);
+	
+	UserLoginInfoEn findByUserEmail(String userEmail);
 }
