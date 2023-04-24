@@ -60,7 +60,7 @@ public class UsersAdminControl {
 			return new ResponseEntity<>(userAdminService.getGuardianInfoByEmail(userEmail), HttpStatus.OK);
 	}
 	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/all" , produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUserInfoAll() {
 			return new ResponseEntity<>(userAdminService.getUserInfoAll(), HttpStatus.OK);
 	}
