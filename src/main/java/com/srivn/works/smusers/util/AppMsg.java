@@ -25,7 +25,7 @@ public class AppMsg {
 			return msg;
 		}
 
-		public String getMsgWithParam(@Nullable String... params) {
+		public String getMsgP(@Nullable String... params) {
 			return getMsg().format(msg, params);
 		}
 
@@ -33,8 +33,10 @@ public class AppMsg {
 
 	public enum Msg {
 		MSG_OK_000("OK", "Howdy!"),
-		MSG_ADD_001("ADDED", "Data Saved succesfully"),
-		MSG_EXIST_002("EXIST", "Data Exist");
+		MSG_ADD_001("ADDED", "Added %s succesfully"),
+		MSG_EXIST_002("EXIST", "Data %s Exist"),
+		MSG_UPDATE_003("UPDATED", "Updated %s succesfully"),
+		MSG_DELETE_004("DELETED", "Deleted %s succesfully");
 		
 		private final String code;
 		private final String msg;
@@ -50,6 +52,14 @@ public class AppMsg {
 
 		public String getMsg() {
 			return msg;
+		}
+		
+		public String getMsgP(@Nullable String... params) {
+			if(params.length == 0) {
+				return getMsg().format(msg, "");	
+			}else {
+				return getMsg().format(msg, params);	
+			}
 		}
 
 	}

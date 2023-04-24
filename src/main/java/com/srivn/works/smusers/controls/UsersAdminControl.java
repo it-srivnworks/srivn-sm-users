@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,9 +45,9 @@ public class UsersAdminControl {
 			return new ResponseEntity<>(userAdminService.updateGuardianInfo(userEmail, gInfo), HttpStatus.OK);
 	}
 	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getUserInfoAll() {
-			return new ResponseEntity<>(userAdminService.getUserInfoAll(), HttpStatus.OK);
+	@DeleteMapping(value = "/guardian/{userEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> deleteGuardianInfo(@PathVariable String userEmail) {
+			return new ResponseEntity<>(userAdminService.deleteGuardianInfo(userEmail), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/guardian/", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -55,8 +56,13 @@ public class UsersAdminControl {
 	}
 	
 	@GetMapping(value = "/guardian/{userEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getGuardianInfobyEmail(@PathVariable String userEmail) {
-			return new ResponseEntity<>(userAdminService.getGuardianInfobyEmail(userEmail), HttpStatus.OK);
+	public ResponseEntity<?> getGuardianInfoByEmail(@PathVariable String userEmail) {
+			return new ResponseEntity<>(userAdminService.getGuardianInfoByEmail(userEmail), HttpStatus.OK);
+	}
+	
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getUserInfoAll() {
+			return new ResponseEntity<>(userAdminService.getUserInfoAll(), HttpStatus.OK);
 	}
 }
 

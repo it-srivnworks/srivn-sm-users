@@ -16,8 +16,13 @@ public class DataTransactionService {
 	@PersistenceContext
     private EntityManager entityManager;
 	
-	public void addUserDetailsAndLogin(GuardianInfoEn grEn,UserLoginInfoEn ulEn){
+	public void addGDNDetailsAndLogin(GuardianInfoEn grEn,UserLoginInfoEn ulEn){
 		 entityManager.persist(grEn);
 		 entityManager.persist(ulEn);
+	 }
+	
+	public void deleteGDNDetailsAndLogin(GuardianInfoEn grEn,UserLoginInfoEn ulEn){
+		 entityManager.remove(grEn);
+		 entityManager.remove(ulEn);
 	 }
 }

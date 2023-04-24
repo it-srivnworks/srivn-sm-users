@@ -20,6 +20,6 @@ public class SMException extends RuntimeException {
 	private String message;
 
 	public static SMException getSMException(Err err,@Nullable String xtraString) {
-		return new SMException(err.getCode(), err.getMsgWithParam(xtraString));
+		return new SMException(err.getCode(), err.getMsgP(xtraString));
 	}
 }

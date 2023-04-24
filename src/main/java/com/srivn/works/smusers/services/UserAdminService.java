@@ -59,17 +59,17 @@ public class UserAdminService {
 				GuardianInfoEn en = cGuiInfoMapper.DTOToEn(gInfo);
 				UserLoginInfoEn ulEn = new UserLoginInfoEn(gInfo.getUserEmail(), AppUtil.generatePwd(),
 						Timestamp.from(Instant.now()), AppC.Status.NEW.getCode());
-				dataTransactionS.addUserDetailsAndLogin(en, ulEn);
+				dataTransactionS.addGDNDetailsAndLogin(en, ulEn);
 				return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
-						.message(AppMsg.Msg.MSG_ADD_001.getMsg()).build();
+						.message(AppMsg.Msg.MSG_ADD_001.getMsgP()).build();
 			} else {
 				throw new SMException(AppMsg.Err.ERR_DUP_002.getCode(),
-						AppMsg.Err.ERR_DUP_002.getMsgWithParam("userEmail"));
+						AppMsg.Err.ERR_DUP_002.getMsgP("userEmail"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgP());
 
 		}
 	}
@@ -82,21 +82,53 @@ public class UserAdminService {
 				GuardianInfoEn en = grRepo.findByUserEmail(userEmail);
 				en = cGuiInfoMapper.DTOToUpdateEn(gInfo,en);
 				ulEn.setLastLogin(Timestamp.from(Instant.now())); 		
-				dataTransactionS.addUserDetailsAndLogin(en, ulEn);						
-				return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
-						.message(AppMsg.Msg.MSG_ADD_001.getMsg()).build();
+				dataTransactionS.addGDNDetailsAndLogin(en, ulEn);						
+				return SMMessage.builder().appCode(AppMsg.Msg.MSG_UPDATE_003.getCode())
+						.message(AppMsg.Msg.MSG_UPDATE_003.getMsgP()).build();
 			} else {
 				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(),
-						AppMsg.Err.ERR__DNF_001.getMsgWithParam("userEmail"));
+						AppMsg.Err.ERR__DNF_001.getMsgP("userEmail"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgP());
 
 		}
 	}
 	 
+	public SMMessage deleteGuardianInfo(String userEmail) {
+		try {
+			UserLoginInfoEn ulEn = ulRepo.findByUserEmail(userEmail);
+			if (ulEn != null) {
+				GuardianInfoEn en = grRepo.findByUserEmail(userEmail);
+				dataTransactionS.deleteGDNDetailsAndLogin(en, ulEn);						
+				return SMMessage.builder().appCode(AppMsg.Msg.MSG_DELETE_004.getCode())
+						.message(AppMsg.Msg.MSG_DELETE_004.getMsgP()).build();
+			} else {
+				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(),
+						AppMsg.Err.ERR__DNF_001.getMsgP("userEmail"));
+			}
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgP());
+
+		}
+	}
+	
+	public List<GuardianInfo> getGuardianInfoAll() {
+		List<GuardianInfo> uiList = grRepo.findAll().stream().map(en -> {
+			return cGuiInfoMapper.EnToDTO(en);
+		}).collect(Collectors.toList());
+		return uiList;
+
+	}
+
+	public GuardianInfo getGuardianInfoByEmail(String userEmail) {
+		return cGuiInfoMapper.EnToDTO(grRepo.findByUserEmail(userEmail));
+	}
+
 	/*Heavy query due to JPA JOIN on all user child tables*/
 	public List<UserInfo> getUserInfoAll() {
 		List<UserInfo> uiList = uiRepo.findAll().stream().map(en -> {
@@ -106,25 +138,13 @@ public class UserAdminService {
 
 	}
 
-	public List<GuardianInfo> getGuardianInfoAll() {
-		List<GuardianInfo> uiList = grRepo.findAll().stream().map(en -> {
-			return cGuiInfoMapper.EnToDTO(en);
-		}).collect(Collectors.toList());
-		return uiList;
-
-	}
-
-	public GuardianInfo getGuardianInfobyEmail(String userEmail) {
-		return cGuiInfoMapper.EnToDTO(grRepo.findByUserEmail(userEmail));
-	}
-
 	public SMMessage checkIfEmailExist(String userEmail) {
 		if (ulRepo.checkUserEmail(userEmail) > 0) {
 			return SMMessage.builder().appCode(AppMsg.Msg.MSG_EXIST_002.getCode())
 					.message(AppMsg.Msg.MSG_EXIST_002.getMsg()).build();
 		} else {
 			throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(),
-					AppMsg.Err.ERR__DNF_001.getMsgWithParam("userEmail"));
+					AppMsg.Err.ERR__DNF_001.getMsgP("userEmail"));
 		}
 	}
 }
