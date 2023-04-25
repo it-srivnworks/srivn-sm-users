@@ -1,4 +1,4 @@
-package com.srivn.works.smusers.db.entity.personal;
+package com.srivn.works.smusers.db.dto.personal;
 
 import java.io.Serializable;
 
@@ -16,15 +16,9 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-@Entity
-@Table(name = "CONTACTS")
 public class ContactInfo implements Serializable{
 
-	@Id
-	@Column(name = "primaryNo")
 	private String primaryNo;
-
-	@Column(name = "secondaryNo")
 	private String secondaryNo;
 
 	@Builder	

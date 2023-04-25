@@ -25,7 +25,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "ADDRESS")
-public class AddressInfo implements Serializable {
+public class AddressInfoEn{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,8 +51,12 @@ public class AddressInfo implements Serializable {
 	@Column(name = "zipCode")
 	private String zipCode;
 
+	public AddressInfoEn() {
+		super();
+	}
+	
 	@Builder
-	public AddressInfo(String houseNumber, String street, String city, String state, ClsnValEn country,
+	public AddressInfoEn(String houseNumber, String street, String city, String state, ClsnValEn country,
 			String zipCode) {
 		super();
 		this.houseNumber = houseNumber;

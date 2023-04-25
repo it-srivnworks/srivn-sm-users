@@ -23,7 +23,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "HEALTH_INFO")
-public class HealthInfo implements Serializable{
+public class HealthInfoEn{
 
 	@Id
     @Column(name = "userID")
@@ -42,7 +42,7 @@ public class HealthInfo implements Serializable{
     private UserInfoEn userInfoEn;
 
 	@Builder
-	public HealthInfo(ClsnValEn bloodGroup, String notes) {
+	public HealthInfoEn(ClsnValEn bloodGroup, String notes) {
 		super();
 		this.bloodGroup = bloodGroup;
 		this.notes = notes;

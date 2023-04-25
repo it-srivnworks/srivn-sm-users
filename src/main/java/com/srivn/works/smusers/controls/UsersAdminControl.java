@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.srivn.works.smusers.db.dao.users.GuardianInfo;
+import com.srivn.works.smusers.db.dto.users.GuardianInfo;
+import com.srivn.works.smusers.db.dto.users.StaffInfo;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.services.UserAdminService;
@@ -58,6 +59,11 @@ public class UsersAdminControl {
 	@GetMapping(value = "/guardian/{userEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getGuardianInfoByEmail(@PathVariable String userEmail) {
 			return new ResponseEntity<>(userAdminService.getGuardianInfoByEmail(userEmail), HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/staff/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> addNewStaffInfo(@RequestBody StaffInfo sInfo) {
+			return new ResponseEntity<>(userAdminService.addNewStaffInfo(sInfo), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/all" , produces = MediaType.APPLICATION_JSON_VALUE)

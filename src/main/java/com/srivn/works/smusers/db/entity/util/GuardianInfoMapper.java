@@ -1,4 +1,4 @@
-package com.srivn.works.smusers.db.mappers;
+package com.srivn.works.smusers.db.entity.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
@@ -12,7 +12,7 @@ import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.util.AppC;
 
 @Mapper
-public interface GuardianInfoMapper{
+public interface GuardianInfoMapper {
 	
 	GuardianInfoMapper INSTANCE = Mappers.getMapper(GuardianInfoMapper.class);
 	
@@ -31,5 +31,6 @@ public interface GuardianInfoMapper{
 	@Mapping(target="userType",  ignore = true)
 	@Mapping(target="gender", ignore = true)
 	public GuardianInfoEn DTOToUpdateEn(GuardianInfo dto,@MappingTarget GuardianInfoEn en);
+	
 	
 }

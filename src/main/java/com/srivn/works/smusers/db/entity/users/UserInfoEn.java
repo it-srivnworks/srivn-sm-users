@@ -3,7 +3,6 @@ package com.srivn.works.smusers.db.entity.users;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import com.srivn.works.smusers.db.entity.personal.AddressInfo;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 import jakarta.persistence.CascadeType;
@@ -43,8 +42,9 @@ public abstract class UserInfoEn {
 	@Column(name = "lastName")
 	private String lastName;
 
-	@Column(name = "gender")
-	private int gender;
+	@ManyToOne
+	@JoinColumn(name = "gender")
+	private ClsnValEn gender;
 
 	@Column(name = "userDOB")
 	private Timestamp userDOB;
@@ -56,7 +56,7 @@ public abstract class UserInfoEn {
 	@Column(name = "userEmail")
 	private String userEmail;
 
-	public UserInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
+	public UserInfoEn(String firstName, String lastName, ClsnValEn gender, Timestamp userDOB, ClsnValEn userType,
 			String userEmail) {
 		super();
 		this.firstName = firstName;

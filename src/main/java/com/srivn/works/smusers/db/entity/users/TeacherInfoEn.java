@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import com.srivn.works.smusers.db.entity.personal.AddressInfo;
-import com.srivn.works.smusers.db.entity.personal.ContactInfo;
+import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
+import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 import jakarta.persistence.Entity;
@@ -27,11 +27,11 @@ import lombok.ToString;
 public class TeacherInfoEn extends UserInfoEn {
 	@ManyToOne
 	@JoinColumn(name = "contactInfo")
-	private ContactInfo contactInfo;
+	private ContactInfoEn contactInfo;
 
 	@ManyToOne
 	@JoinColumn(name = "addressInfo")
-	private AddressInfo addressInfo;
+	private AddressInfoEn addressInfo;
 	
 	@ManyToOne
 	@JoinColumn(name = "dept")
@@ -41,8 +41,8 @@ public class TeacherInfoEn extends UserInfoEn {
 	@JoinColumn(name = "title")
 	private ClsnValEn title;
 
-	public TeacherInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
-			String userEmail, ContactInfo contactInfo, AddressInfo addressInfo, ClsnValEn dept, ClsnValEn title) {
+	public TeacherInfoEn(String firstName, String lastName, ClsnValEn gender, Timestamp userDOB, ClsnValEn userType,
+			String userEmail, ContactInfoEn contactInfo, AddressInfoEn addressInfo, ClsnValEn dept, ClsnValEn title) {
 		super(firstName, lastName, gender, userDOB, userType, userEmail);
 		this.contactInfo = contactInfo;
 		this.addressInfo = addressInfo;

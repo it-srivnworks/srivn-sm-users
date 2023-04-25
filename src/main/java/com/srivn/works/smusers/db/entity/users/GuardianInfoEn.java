@@ -20,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "GUARDIANS")
 public class GuardianInfoEn extends UserInfoEn {
-	public GuardianInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
+	public GuardianInfoEn(String firstName, String lastName, ClsnValEn gender, Timestamp userDOB, ClsnValEn userType,
 			String userEmail) {
 		super(firstName, lastName, gender, userDOB, userType, userEmail);
 		// TODO Auto-generated constructor stub

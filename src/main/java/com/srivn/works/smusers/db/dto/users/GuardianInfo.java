@@ -1,4 +1,4 @@
-package com.srivn.works.smusers.db.dao.users;
+package com.srivn.works.smusers.db.dto.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

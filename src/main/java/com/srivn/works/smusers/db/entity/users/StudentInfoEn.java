@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import com.srivn.works.smusers.db.entity.personal.AddressInfo;
-import com.srivn.works.smusers.db.entity.personal.ContactInfo;
-import com.srivn.works.smusers.db.entity.personal.HealthInfo;
+import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
+import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
+import com.srivn.works.smusers.db.entity.personal.HealthInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 import jakarta.persistence.Entity;
@@ -29,19 +29,19 @@ public class StudentInfoEn extends UserInfoEn {
 
 	@ManyToOne
 	@JoinColumn(name = "contactInfo")
-	private ContactInfo contactInfo;
+	private ContactInfoEn contactInfo;
 
 	@ManyToOne
 	@JoinColumn(name = "emergencyContact")
-	private ContactInfo emergencyContact;
+	private ContactInfoEn emergencyContact;
 
 	@ManyToOne
 	@JoinColumn(name = "addressInfo")
-	private AddressInfo addressInfo;
+	private AddressInfoEn addressInfo;
 
 	@ManyToOne
 	@JoinColumn(name = "healthInfo")
-	private HealthInfo healthInfo;
+	private HealthInfoEn healthInfo;
 
 	@ManyToOne
 	@JoinColumn(name = "pguardian")
@@ -51,9 +51,9 @@ public class StudentInfoEn extends UserInfoEn {
 	@JoinColumn(name = "sguardian")
 	private GuardianInfoEn sguardian;
 
-	public StudentInfoEn(String firstName, String lastName, int gender, Timestamp userDOB, ClsnValEn userType,
-			String userEmail, ContactInfo contactInfo, ContactInfo emergencyContact, AddressInfo addressInfo,
-			HealthInfo healthInfo, GuardianInfoEn pguardian, GuardianInfoEn sguardian) {
+	public StudentInfoEn(String firstName, String lastName, ClsnValEn gender, Timestamp userDOB, ClsnValEn userType,
+			String userEmail, ContactInfoEn contactInfo, ContactInfoEn emergencyContact, AddressInfoEn addressInfo,
+			HealthInfoEn healthInfo, GuardianInfoEn pguardian, GuardianInfoEn sguardian) {
 		super(firstName, lastName, gender, userDOB, userType, userEmail);
 		this.contactInfo = contactInfo;
 		this.emergencyContact = emergencyContact;

@@ -1,4 +1,4 @@
-package com.srivn.works.smusers.db.repo;
+package com.srivn.works.smusers.db.repo.users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

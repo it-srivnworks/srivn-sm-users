@@ -1,4 +1,6 @@
-package com.srivn.works.smusers.db.dao.users;
+package com.srivn.works.smusers.db.dto.users;
+
+import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +11,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class UserInfo {
+public class UserInfo implements Serializable {
 
 	private String firstName;
 	private String lastName;
