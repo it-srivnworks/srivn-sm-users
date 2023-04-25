@@ -61,10 +61,36 @@ public class UsersAdminControl {
 			return new ResponseEntity<>(userAdminService.getGuardianInfoByEmail(userEmail), HttpStatus.OK);
 	}
 	
+	/*
+	 * STAFF
+	 * */
 	@PostMapping(value = "/staff/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addNewStaffInfo(@RequestBody StaffInfo sInfo) {
 			return new ResponseEntity<>(userAdminService.addNewStaffInfo(sInfo), HttpStatus.OK);
 	}
+	
+	@PutMapping(value = "/staff/{userEmail}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateStaffInfo(@PathVariable String userEmail, @RequestBody StaffInfo sInfo) {
+			return new ResponseEntity<>(userAdminService.updateStaffInfo(userEmail, sInfo), HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/staff/{userEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> deletStaffInfo(@PathVariable String userEmail) {
+			return new ResponseEntity<>(userAdminService.deleteStaffInfo(userEmail), HttpStatus.OK);
+	}
+	@GetMapping(value = "/staff/", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getStaffInfoAll() {
+			return new ResponseEntity<>(userAdminService.getStaffInfoAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/staff/{userEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getStaffInfoByEmail(@PathVariable String userEmail) {
+			return new ResponseEntity<>(userAdminService.getStaffInfoByEmail(userEmail), HttpStatus.OK);
+	}
+	
+	/*
+	 * ALL USER
+	 * */
 	
 	@GetMapping(value = "/all" , produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUserInfoAll() {

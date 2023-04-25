@@ -31,4 +31,9 @@ public class DataTransactionService {
 		entityManager.persist(stEn);
 		 entityManager.persist(ulEn);
 	 }
+	
+	public void deleteSTFDetailsAndLogin(StaffInfoEn grEn,UserLoginInfoEn ulEn){
+		 entityManager.remove(grEn);
+		 entityManager.remove(ulEn);
+	 }
 }

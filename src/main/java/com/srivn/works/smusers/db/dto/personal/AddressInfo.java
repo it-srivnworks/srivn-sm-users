@@ -5,7 +5,9 @@ import jakarta.persistence.ManyToOne;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
+import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
@@ -23,7 +25,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class AddressInfo implements Serializable {
+public class AddressInfo implements Serializable{
 
 	private String houseNumber;
 	private String street;
@@ -44,4 +46,22 @@ public class AddressInfo implements Serializable {
 		this.zipCode = zipCode;
 	}
 
+	// Overriding equals() method
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof AddressInfo))
+			return false;
+		AddressInfo ai = (AddressInfo) o;
+		return Objects.equals(getZipCode(), ai.getZipCode()) && Objects.equals(getHouseNumber(), ai.getHouseNumber())
+				&& Objects.equals(getStreet(), ai.getStreet()) && Objects.equals(getCity(), ai.getCity());
+	}
+
+	// Overriding hashCode() method
+	@Override
+	public int hashCode() {
+		return Objects.hash(getZipCode(), getHouseNumber(), getStreet(), getCity());
+	}
+	
 }

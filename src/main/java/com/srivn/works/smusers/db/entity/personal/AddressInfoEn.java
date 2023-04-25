@@ -5,6 +5,7 @@ import jakarta.persistence.ManyToOne;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
@@ -25,7 +26,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "ADDRESS")
-public class AddressInfoEn{
+public class AddressInfoEn {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,7 +55,7 @@ public class AddressInfoEn{
 	public AddressInfoEn() {
 		super();
 	}
-	
+
 	@Builder
 	public AddressInfoEn(String houseNumber, String street, String city, String state, ClsnValEn country,
 			String zipCode) {
@@ -67,4 +68,21 @@ public class AddressInfoEn{
 		this.zipCode = zipCode;
 	}
 
+	// Overriding equals() method
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof AddressInfoEn))
+			return false;
+		AddressInfoEn ai = (AddressInfoEn) o;
+		return Objects.equals(getZipCode(), ai.getZipCode()) && Objects.equals(getHouseNumber(), ai.getHouseNumber())
+				&& Objects.equals(getStreet(), ai.getStreet()) && Objects.equals(getCity(), ai.getCity());
+	}
+
+	// Overriding hashCode() method
+	@Override
+	public int hashCode() {
+		return Objects.hash(getZipCode(), getHouseNumber(), getStreet(), getCity());
+	}
 }

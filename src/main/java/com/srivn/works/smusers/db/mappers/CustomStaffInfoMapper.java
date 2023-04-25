@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
+import com.srivn.works.smusers.db.dto.personal.AddressInfo;
 import com.srivn.works.smusers.db.dto.users.StaffInfo;
+import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
 import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
 import com.srivn.works.smusers.db.repo.users.ClsnValRepo;
 import com.srivn.works.smusers.util.AppC;
@@ -41,4 +43,9 @@ public class CustomStaffInfoMapper {
 		en.setDept(clsnValRepo.findByValue(dto.getUserType()));
 		return enU;
 	}
+	
+	public AddressInfoEn DTOToEnAddress(AddressInfo dto) {
+		return  StaffInfoMapper.INSTANCE.DTOToEnAddress(dto);
+	}
+	
 }
