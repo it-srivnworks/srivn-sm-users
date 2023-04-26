@@ -56,7 +56,6 @@ public class AddressInfoEn {
 		super();
 	}
 
-	@Builder
 	public AddressInfoEn(String houseNumber, String street, String city, String state, ClsnValEn country,
 			String zipCode) {
 		super();

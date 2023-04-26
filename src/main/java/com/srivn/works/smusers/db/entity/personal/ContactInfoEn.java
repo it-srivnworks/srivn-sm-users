@@ -34,7 +34,6 @@ public class ContactInfoEn {
 		super();
 	}
 
-	@Builder
 	public ContactInfoEn(long iD, String primaryNo, String secondaryNo) {
 		super();
 		ID = iD;

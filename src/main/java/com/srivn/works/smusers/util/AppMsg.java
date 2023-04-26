@@ -6,7 +6,7 @@ public class AppMsg {
 
 	public enum Err {
 		ERR_UKN_000("UNKNOWN", "Unknown Error, Please Try Again!"), 
-		ERR__DNF_001("DNF", "%s not found"),
+		ERR_DNF_001("DNF", "%s not found"),
 		ERR_DUP_002("DUP", "%s already present.");
 
 		private final String code;

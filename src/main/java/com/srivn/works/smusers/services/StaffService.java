@@ -78,7 +78,7 @@ public class StaffService {
 				return SMMessage.builder().appCode(AppMsg.Msg.MSG_UPDATE_003.getCode())
 						.message(AppMsg.Msg.MSG_UPDATE_003.getMsgP()).build();
 			} else {
-				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(), AppMsg.Err.ERR__DNF_001.getMsgP("userEmail"));
+				throw new SMException(AppMsg.Err.ERR_DNF_001.getCode(), AppMsg.Err.ERR_DNF_001.getMsgP("userEmail"));
 			}
 		} catch (SMException e) {
 			throw e;
@@ -98,7 +98,7 @@ public class StaffService {
 				return SMMessage.builder().appCode(AppMsg.Msg.MSG_DELETE_004.getCode())
 						.message(AppMsg.Msg.MSG_DELETE_004.getMsgP()).build();
 			} else {
-				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(), AppMsg.Err.ERR__DNF_001.getMsgP("userEmail"));
+				throw new SMException(AppMsg.Err.ERR_DNF_001.getCode(), AppMsg.Err.ERR_DNF_001.getMsgP("userEmail"));
 			}
 		} catch (SMException e) {
 			throw e;

@@ -41,7 +41,8 @@ public class HealthInfoEn{
     @JoinColumn(name = "userID")
     private UserInfoEn userInfoEn;
 
-	@Builder
+	public HealthInfoEn(){};
+
 	public HealthInfoEn(ClsnValEn bloodGroup, String notes) {
 		super();
 		this.bloodGroup = bloodGroup;

@@ -78,7 +78,7 @@ public class UserAdminService {
 			return SMMessage.builder().appCode(AppMsg.Msg.MSG_EXIST_002.getCode())
 					.message(AppMsg.Msg.MSG_EXIST_002.getMsg()).build();
 		} else {
-			throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(), AppMsg.Err.ERR__DNF_001.getMsgP("userEmail"));
+			throw new SMException(AppMsg.Err.ERR_DNF_001.getCode(), AppMsg.Err.ERR_DNF_001.getMsgP("userEmail"));
 		}
 	}
 
