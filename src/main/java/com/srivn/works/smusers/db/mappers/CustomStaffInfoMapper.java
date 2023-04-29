@@ -2,6 +2,8 @@ package com.srivn.works.smusers.db.mappers;
 
 import java.sql.Timestamp;
 
+import com.srivn.works.smusers.db.dto.personal.ContactInfo;
+import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
 import org.springframework.stereotype.Component;
 
 import com.srivn.works.smusers.db.dto.personal.AddressInfo;
@@ -46,6 +48,10 @@ public class CustomStaffInfoMapper {
 	
 	public AddressInfoEn DTOToEnAddress(AddressInfo dto) {
 		return  StaffInfoMapper.INSTANCE.DTOToEnAddress(dto);
+	}
+
+	public ContactInfoEn DTOToEnContact(ContactInfo dto) {
+		return  StaffInfoMapper.INSTANCE.DTOToEnContact(dto);
 	}
 	
 }

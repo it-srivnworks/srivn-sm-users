@@ -1,5 +1,7 @@
 package com.srivn.works.smusers.db.mappers;
 
+import com.srivn.works.smusers.db.dto.personal.ContactInfo;
+import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -46,4 +48,6 @@ public interface StaffInfoMapper{
 	
 	@Mapping(target="country",  ignore = true)
 	public AddressInfoEn DTOToEnAddress(AddressInfo dto);
+
+	public ContactInfoEn DTOToEnContact(ContactInfo dto);
 }
