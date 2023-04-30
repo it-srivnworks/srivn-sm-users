@@ -27,7 +27,7 @@ public class StaffInfoControl {
 	 * */
 	@PostMapping(value = "/ADD", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addNewStaffInfo(@RequestBody StaffInfo sInfo) {
-			return new ResponseEntity<>(staffService.addNewStaffInfo(sInfo), HttpStatus.OK);
+		return new ResponseEntity<>(staffService.addNewStaffInfo(sInfo), HttpStatus.OK);
 	}
 	
 	@PutMapping(value = "/UPDATE/{userEmail}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
