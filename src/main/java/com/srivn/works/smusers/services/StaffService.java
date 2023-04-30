@@ -166,6 +166,7 @@ public class StaffService {
     }
 
     public StaffInfo getStaffInfoByEmail(String userEmail) {
+        
         return cStaffMapper.EnToDTO(staffRepo.findByUserEmail(userEmail));
     }
 }
