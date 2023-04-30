@@ -50,7 +50,7 @@ class UserAdminServiceTest {
     private ContactInfoRepo contactInfoRepo;
     @MockBean
     private DataTransactionService dataTransactionService;
-    @Autowired
+
     private UserAdminService userAdminService;
 
 
@@ -66,6 +66,8 @@ class UserAdminServiceTest {
         userType = new ClsnValEn(100, "GUARDIAN", new ClsnEn(1, "USERTYPE"));
         userInfoEn01 = new GuardianInfoEn("Jane", "Doe", gender, userDOB, userType, "jane.doe@example.org");
         userInfoEn02 = new GuardianInfoEn("Jenny", "Doe", gender, userDOB, userType, "jenny.doe@example.org");
+        //
+        userAdminService = spy(new UserAdminService(userInfoRepo, userLoginInfoRepo, addressInfoRepo, contactInfoRepo, dataTransactionService));
     }
 
 

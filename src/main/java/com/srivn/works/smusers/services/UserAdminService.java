@@ -53,7 +53,7 @@ public class UserAdminService {
 
 	private static final Logger log = LoggerFactory.getLogger(UserAdminService.class);
 
-	private final UserInfoRepo userRepo;
+	private final UserInfoRepo userInfoRepo;
 
 	private final UserLoginInfoRepo userLoginRepo;
 	
@@ -65,7 +65,7 @@ public class UserAdminService {
 
 	/* Heavy query due to JPA JOIN on all user child tables */
 	public List<UserInfo> getUserInfoAll() {
-		List<UserInfo> uiList = userRepo.findAll().stream().map(en -> {
+		List<UserInfo> uiList = userInfoRepo.findAll().stream().map(en -> {
 			UserInfo ui = new UserInfo();
 			BeanUtils.copyProperties(en, ui);
 			return ui;

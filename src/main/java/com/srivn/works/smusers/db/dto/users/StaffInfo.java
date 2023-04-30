@@ -24,4 +24,5 @@ public class StaffInfo extends UserInfo {
 		this.title = title;
 	}
 
+
 }

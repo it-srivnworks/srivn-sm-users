@@ -44,6 +44,10 @@ public class StaffService {
      * STAFF
      */
 
+    public SMMessage tester() {
+        return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
+                .message(AppMsg.Msg.MSG_ADD_001.getMsgP()).build();
+    }
     public SMMessage addNewStaffInfo(StaffInfo sInfo) {
         try {
             if (userAdminService.getUserLoginRepo().checkUserEmail(sInfo.getUserEmail()) == 0) {
