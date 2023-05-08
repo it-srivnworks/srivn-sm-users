@@ -1,25 +1,18 @@
 package com.srivn.works.smusers.db.entity.users;
 
-import jakarta.persistence.Table;
-
-import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
-
-import com.srivn.works.smusers.db.entity.util.ClsnValEn;
-
+import com.srivn.works.smusers.util.AppC;
+import com.srivn.works.smusers.util.AppUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
-import lombok.Builder;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @ToString
 @Getter
@@ -53,4 +46,8 @@ public class UserLoginInfoEn implements Serializable{
 		this.currentStatus = currentStatus;
 	}
 
+	public static UserLoginInfoEn createNew(String userEmail){
+		UserLoginInfoEn ulEn = new UserLoginInfoEn(userEmail, AppUtil.generatePwd(), Timestamp.from(Instant.now()), AppC.Status.NEW.getCode());
+		return ulEn;
+	}
 }

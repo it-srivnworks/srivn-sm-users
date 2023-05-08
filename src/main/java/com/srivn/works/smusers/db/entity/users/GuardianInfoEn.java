@@ -1,17 +1,14 @@
 package com.srivn.works.smusers.db.entity.users;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.sql.Timestamp;
 
 @ToString
 @Getter

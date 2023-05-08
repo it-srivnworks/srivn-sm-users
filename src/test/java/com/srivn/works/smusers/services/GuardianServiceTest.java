@@ -1,9 +1,7 @@
 package com.srivn.works.smusers.services;
 
 import com.srivn.works.smusers.db.dto.users.GuardianInfo;
-import com.srivn.works.smusers.db.dto.users.StaffInfo;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
-import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
 import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
@@ -15,28 +13,29 @@ import com.srivn.works.smusers.db.repo.users.UserInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserLoginInfoRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.MockedStatic;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.spy;
 
 @ContextConfiguration(classes = {UserAdminService.class, GuardianService.class})
 @ActiveProfiles({"test"})
 @ExtendWith(SpringExtension.class)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GuardianServiceTest {
     /*********************Components*********************/
     @MockBean
@@ -65,6 +64,16 @@ class GuardianServiceTest {
     UserLoginInfoEn userLoginInfoEn;
     GuardianInfoEn guardianInfoEn01, guardianInfoEn02;
 
+    /*********************Others*********************/
+    private static MockedStatic<UserLoginInfoEn> mockedSettings;
+    @BeforeAll
+    static void atStart() {
+        mockedSettings = mockStatic(UserLoginInfoEn.class);
+    }
+    @AfterAll
+    static void atEnd() {
+        mockedSettings.close();
+    }
     @BeforeEach
     void init() {
         guardianInfo = new GuardianInfo("Jane", "Doe", "MALE", "1990-01-01", "STAFF", "jane.doe@example.org");
@@ -85,13 +94,12 @@ class GuardianServiceTest {
         //Arrange
         when(userAdminService.getUserLoginRepo().checkUserEmail(guardianInfo.getUserEmail())).thenReturn(0);
         when(cGuardianMapper.DTOToEn(guardianInfo)).thenReturn(guardianInfoEn01);
-        when(userAdminService.getLoginInfo(guardianInfo.getUserEmail())).thenReturn(userLoginInfoEn);
+        when(UserLoginInfoEn.createNew(guardianInfo.getUserEmail())).thenReturn(userLoginInfoEn);
         //Act
         SMMessage actual = guardianService.addNewGuardianInfo(guardianInfo);
         //Assert
         assertEquals("ADDED", actual.getAppCode());
         verify(cGuardianMapper, times(1)).DTOToEn(guardianInfo);
-        verify(userAdminService, times(1)).getLoginInfo(guardianInfo.getUserEmail());
         verify(userAdminService.getDataTranService(), times(1)).addGDNDetailsAndLogin(guardianInfoEn01, userLoginInfoEn);
 
     }
@@ -107,11 +115,10 @@ class GuardianServiceTest {
     }
 
     @Test
-    void test_addNewGuardianInfo_EX_UNKNOW() {
+    void test_addNewGuardianInfo_EX_UNKNOWN() {
         //Arrange
         when(userAdminService.getUserLoginRepo().checkUserEmail(guardianInfo.getUserEmail())).thenReturn(0);
-        when(cGuardianMapper.DTOToEn(guardianInfo)).thenReturn(guardianInfoEn01);
-        when(userAdminService.getLoginInfo(guardianInfo.getUserEmail())).thenThrow(new RuntimeException());
+        when(cGuardianMapper.DTOToEn(guardianInfo)).thenThrow(new RuntimeException());
         //Act
         SMException exception = assertThrows(SMException.class, () -> guardianService.addNewGuardianInfo(guardianInfo));
         //Assert

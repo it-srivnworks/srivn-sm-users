@@ -1,10 +1,9 @@
 package com.srivn.works.smusers.db.repo.users;
 
+import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
 
 public interface UserLoginInfoRepo extends JpaRepository<UserLoginInfoEn, Integer>{
 

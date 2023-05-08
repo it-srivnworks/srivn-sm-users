@@ -1,17 +1,14 @@
 package com.srivn.works.smusers.db.entity.users;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.mockito.Mockito.mock;
-
 import com.srivn.works.smusers.db.entity.util.ClsnEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class GuardianInfoEnTest {
 
@@ -26,8 +23,8 @@ class GuardianInfoEnTest {
         gender = new ClsnValEn(100, "MALE", new ClsnEn(1, "GENDER"));
         userDOB = mock(Timestamp.class);
         userType = new ClsnValEn(100, "STAFF", new ClsnEn(1, "USERTYPE"));
-        actualGuardianInfoEn = new GuardianInfoEn("Jane", "Doe", gender, userDOB, userType,
-                "jane.doe@example.org");
+        actualGuardianInfoEn = new GuardianInfoEn("primguardian", "Doe", gender, userDOB, userType,
+                "primguardian.doe@example.org");
     }
 
     @Test
@@ -45,12 +42,12 @@ class GuardianInfoEnTest {
     @Test
     void test_constructor_P() {
         // Assert
-        assertEquals("Jane", actualGuardianInfoEn.getFirstName());
+        assertEquals("primguardian", actualGuardianInfoEn.getFirstName());
         assertEquals("Doe", actualGuardianInfoEn.getLastName());
         assertEquals("MALE", actualGuardianInfoEn.getGender().getValue());
         assertSame(userDOB, actualGuardianInfoEn.getUserDOB());
         assertEquals("STAFF", actualGuardianInfoEn.getUserType().getValue());
-        assertEquals("jane.doe@example.org", actualGuardianInfoEn.getUserEmail());
+        assertEquals("primguardian.doe@example.org", actualGuardianInfoEn.getUserEmail());
     }
 }
 

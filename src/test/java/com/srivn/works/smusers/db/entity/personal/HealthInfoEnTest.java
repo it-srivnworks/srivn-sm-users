@@ -1,12 +1,11 @@
 package com.srivn.works.smusers.db.entity.personal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-
 import com.srivn.works.smusers.db.entity.util.ClsnEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class HealthInfoEnTest {
 

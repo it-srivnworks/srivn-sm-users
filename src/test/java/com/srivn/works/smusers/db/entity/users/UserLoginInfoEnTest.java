@@ -1,13 +1,11 @@
 package com.srivn.works.smusers.db.entity.users;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.mockito.Mockito.mock;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class UserLoginInfoEnTest {
     @Test

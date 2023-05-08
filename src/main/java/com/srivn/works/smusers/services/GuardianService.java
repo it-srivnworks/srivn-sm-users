@@ -1,14 +1,5 @@
 package com.srivn.works.smusers.services;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
 import com.srivn.works.smusers.db.dto.users.GuardianInfo;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
@@ -17,8 +8,15 @@ import com.srivn.works.smusers.db.repo.users.GuardianInfoRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
 import com.srivn.works.smusers.util.AppMsg;
-
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +35,7 @@ public class GuardianService {
 		try {
 			if (userAdminService.getUserLoginRepo().checkUserEmail(gInfo.getUserEmail()) == 0) {
 				GuardianInfoEn en = cGuardianMapper.DTOToEn(gInfo);
-				UserLoginInfoEn ulEn = userAdminService.getLoginInfo(gInfo.getUserEmail());
+				UserLoginInfoEn ulEn = UserLoginInfoEn.createNew(gInfo.getUserEmail());
 				userAdminService.getDataTranService().addGDNDetailsAndLogin(en, ulEn);
 				return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
 						.message(AppMsg.Msg.MSG_ADD_001.getMsgP()).build();

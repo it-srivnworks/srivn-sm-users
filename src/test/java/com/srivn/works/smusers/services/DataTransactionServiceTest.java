@@ -1,33 +1,25 @@
 package com.srivn.works.smusers.services;
 
 import com.srivn.works.smusers.db.dto.users.GuardianInfo;
-import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
-import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
-import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
 import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-
-import java.sql.Timestamp;
-
 import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.spy;
+import java.sql.Timestamp;
+
+import static org.mockito.Mockito.mock;
 
 @ContextConfiguration(classes = {DataTransactionService.class})
 @ActiveProfiles({"test"})

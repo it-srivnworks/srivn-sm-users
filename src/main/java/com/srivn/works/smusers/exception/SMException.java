@@ -2,7 +2,6 @@ package com.srivn.works.smusers.exception;
 
 
 import com.srivn.works.smusers.util.AppMsg.Err;
-
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

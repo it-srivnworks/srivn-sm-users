@@ -1,20 +1,10 @@
 package com.srivn.works.smusers.controls;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.srivn.works.smusers.db.dto.personal.AddressInfo;
-import com.srivn.works.smusers.db.dto.personal.ContactInfo;
 import com.srivn.works.smusers.db.dto.users.StaffInfo;
-import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
-import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
-import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
-import com.srivn.works.smusers.db.entity.util.ClsnEn;
-import com.srivn.works.smusers.db.entity.util.ClsnValEn;
-import com.srivn.works.smusers.db.mappers.CustomStaffInfoMapper;
-import com.srivn.works.smusers.db.repo.users.StaffInfoRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
 import com.srivn.works.smusers.services.StaffService;
-import com.srivn.works.smusers.services.UserAdminService;
 import com.srivn.works.smusers.util.AppMsg;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,21 +14,19 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles({"test"})
