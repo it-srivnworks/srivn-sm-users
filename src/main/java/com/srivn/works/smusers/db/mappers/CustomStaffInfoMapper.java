@@ -1,19 +1,13 @@
 package com.srivn.works.smusers.db.mappers;
 
-import java.sql.Timestamp;
-
-import com.srivn.works.smusers.db.dto.personal.ContactInfo;
-import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
-import org.springframework.stereotype.Component;
-
-import com.srivn.works.smusers.db.dto.personal.AddressInfo;
 import com.srivn.works.smusers.db.dto.users.StaffInfo;
-import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
 import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
 import com.srivn.works.smusers.db.repo.users.ClsnValRepo;
 import com.srivn.works.smusers.util.AppC;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.sql.Timestamp;
 
 @Component
 @RequiredArgsConstructor
@@ -45,13 +39,5 @@ public class CustomStaffInfoMapper {
 		en.setDept(clsnValRepo.findByValue(dto.getUserType()));
 		return enU;
 	}
-	
-	public AddressInfoEn DTOToEnAddress(AddressInfo dto) {
-		return  StaffInfoMapper.INSTANCE.DTOToEnAddress(dto);
-	}
 
-	public ContactInfoEn DTOToEnContact(ContactInfo dto) {
-		return  StaffInfoMapper.INSTANCE.DTOToEnContact(dto);
-	}
-	
 }

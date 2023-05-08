@@ -1,13 +1,9 @@
 package com.srivn.works.smusers.db.repo.personal;
 
-import java.util.Optional;
-
+import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
-import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
 public interface AddressInfoRepo  extends JpaRepository<AddressInfoEn, Integer>{
 

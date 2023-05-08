@@ -1,9 +1,9 @@
 package com.srivn.works.smusers.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.srivn.works.smusers.util.AppMsg;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SMExceptionTest {
     @Test
