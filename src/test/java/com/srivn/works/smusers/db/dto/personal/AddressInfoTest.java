@@ -1,13 +1,10 @@
 package com.srivn.works.smusers.db.dto.personal;
 
-import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
-import com.srivn.works.smusers.db.entity.util.ClsnValEn;
-import lombok.Getter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 class AddressInfoTest {

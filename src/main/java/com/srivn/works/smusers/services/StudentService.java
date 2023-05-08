@@ -1,8 +1,6 @@
 package com.srivn.works.smusers.services;
 
-import com.srivn.works.smusers.db.dto.users.StaffInfo;
 import com.srivn.works.smusers.db.dto.users.StudentInfo;
-import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
 import com.srivn.works.smusers.db.entity.users.StudentInfoEn;
 import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
 import com.srivn.works.smusers.db.mappers.CustomStudentInfoMapper;
@@ -15,8 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 

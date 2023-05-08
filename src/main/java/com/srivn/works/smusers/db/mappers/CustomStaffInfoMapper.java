@@ -1,19 +1,13 @@
 package com.srivn.works.smusers.db.mappers;
 
-import java.sql.Timestamp;
-
-import com.srivn.works.smusers.db.dto.personal.ContactInfo;
-import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
-import org.springframework.stereotype.Component;
-
-import com.srivn.works.smusers.db.dto.personal.AddressInfo;
 import com.srivn.works.smusers.db.dto.users.StaffInfo;
-import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
 import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
 import com.srivn.works.smusers.db.repo.users.ClsnValRepo;
 import com.srivn.works.smusers.util.AppC;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.sql.Timestamp;
 
 @Component
 @RequiredArgsConstructor

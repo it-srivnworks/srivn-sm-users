@@ -1,8 +1,6 @@
 package com.srivn.works.smusers.controls;
 
-import com.srivn.works.smusers.db.dto.users.StaffInfo;
 import com.srivn.works.smusers.db.dto.users.StudentInfo;
-import com.srivn.works.smusers.services.StaffService;
 import com.srivn.works.smusers.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

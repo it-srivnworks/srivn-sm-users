@@ -1,12 +1,11 @@
 package com.srivn.works.smusers.exception;
 
-import java.io.Serializable;
-
 import com.srivn.works.smusers.util.AppMsg.Msg;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+
+import java.io.Serializable;
 
 
 @Data

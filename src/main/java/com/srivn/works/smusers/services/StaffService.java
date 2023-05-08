@@ -1,35 +1,20 @@
 package com.srivn.works.smusers.services;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import com.srivn.works.smusers.db.dto.personal.ContactInfo;
-import com.srivn.works.smusers.db.entity.users.StudentInfoEn;
+import com.srivn.works.smusers.db.dto.users.StaffInfo;
+import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
+import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
+import com.srivn.works.smusers.db.mappers.CustomStaffInfoMapper;
+import com.srivn.works.smusers.db.repo.users.StaffInfoRepo;
+import com.srivn.works.smusers.exception.SMException;
+import com.srivn.works.smusers.exception.SMMessage;
+import com.srivn.works.smusers.util.AppMsg;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.srivn.works.smusers.db.dto.personal.AddressInfo;
-import com.srivn.works.smusers.db.dto.users.StaffInfo;
-import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
-import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
-import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
-import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
-import com.srivn.works.smusers.db.mappers.CustomStaffInfoMapper;
-import com.srivn.works.smusers.db.repo.personal.AddressInfoRepo;
-import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
-import com.srivn.works.smusers.db.repo.users.StaffInfoRepo;
-import com.srivn.works.smusers.db.repo.users.UserInfoRepo;
-import com.srivn.works.smusers.db.repo.users.UserLoginInfoRepo;
-import com.srivn.works.smusers.exception.SMException;
-import com.srivn.works.smusers.exception.SMMessage;
-import com.srivn.works.smusers.util.AppMsg;
-
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

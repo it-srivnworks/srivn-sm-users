@@ -1,27 +1,13 @@
 package com.srivn.works.smusers.db.entity.users;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import lombok.Builder;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.sql.Timestamp;
 
 @ToString
 @Getter

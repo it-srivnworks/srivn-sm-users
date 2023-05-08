@@ -1,23 +1,19 @@
 package com.srivn.works.smusers.db.entity.users;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
 import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
 import com.srivn.works.smusers.db.entity.personal.HealthInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.sql.Timestamp;
 
 @ToString
 @Getter

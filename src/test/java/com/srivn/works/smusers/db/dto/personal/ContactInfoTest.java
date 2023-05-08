@@ -1,6 +1,5 @@
 package com.srivn.works.smusers.db.dto.personal;
 
-import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

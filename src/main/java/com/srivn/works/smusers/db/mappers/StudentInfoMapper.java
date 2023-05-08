@@ -1,7 +1,6 @@
 
 package com.srivn.works.smusers.db.mappers;
 
-import com.srivn.works.smusers.db.dto.users.StaffInfo;
 import com.srivn.works.smusers.db.dto.users.StudentInfo;
 import com.srivn.works.smusers.db.entity.users.StudentInfoEn;
 import org.mapstruct.Mapper;

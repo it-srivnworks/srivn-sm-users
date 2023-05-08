@@ -5,7 +5,6 @@ import com.srivn.works.smusers.db.dto.personal.ContactInfo;
 import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
 import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
 import com.srivn.works.smusers.db.mappers.CustomPersonalInfoMapper;
-import com.srivn.works.smusers.db.mappers.PersonalInfoMapper;
 import com.srivn.works.smusers.db.repo.personal.AddressInfoRepo;
 import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
 import lombok.RequiredArgsConstructor;

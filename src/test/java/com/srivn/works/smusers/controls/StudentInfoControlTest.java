@@ -1,22 +1,11 @@
 package com.srivn.works.smusers.controls;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.srivn.works.smusers.db.dto.users.StaffInfo;
 import com.srivn.works.smusers.db.dto.users.StudentInfo;
-import com.srivn.works.smusers.db.mappers.CustomPersonalInfoMapper;
-import com.srivn.works.smusers.db.mappers.CustomStudentInfoMapper;
-import com.srivn.works.smusers.db.repo.personal.AddressInfoRepo;
-import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
-import com.srivn.works.smusers.db.repo.users.ClsnValRepo;
-import com.srivn.works.smusers.db.repo.users.GuardianInfoRepo;
-import com.srivn.works.smusers.db.repo.users.StudentInfoRepo;
-import com.srivn.works.smusers.db.repo.users.UserInfoRepo;
-import com.srivn.works.smusers.db.repo.users.UserLoginInfoRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
-import com.srivn.works.smusers.services.*;
+import com.srivn.works.smusers.services.StudentService;
 import com.srivn.works.smusers.util.AppMsg;
-import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,15 +14,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +25,6 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

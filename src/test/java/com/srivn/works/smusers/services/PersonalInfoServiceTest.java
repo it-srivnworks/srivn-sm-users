@@ -2,32 +2,25 @@ package com.srivn.works.smusers.services;
 
 import com.srivn.works.smusers.db.dto.personal.AddressInfo;
 import com.srivn.works.smusers.db.dto.personal.ContactInfo;
-import com.srivn.works.smusers.db.dto.users.StaffInfo;
 import com.srivn.works.smusers.db.entity.personal.AddressInfoEn;
 import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
-import com.srivn.works.smusers.db.entity.users.StaffInfoEn;
-import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
 import com.srivn.works.smusers.db.entity.util.ClsnEn;
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 import com.srivn.works.smusers.db.mappers.CustomPersonalInfoMapper;
-import com.srivn.works.smusers.db.mappers.CustomStaffInfoMapper;
 import com.srivn.works.smusers.db.repo.personal.AddressInfoRepo;
 import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.sql.Timestamp;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @ContextConfiguration(classes = {PersonalInfoService.class})
 @ActiveProfiles({"test"})
