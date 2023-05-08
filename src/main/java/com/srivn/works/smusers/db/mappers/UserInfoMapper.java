@@ -1,5 +1,7 @@
 package com.srivn.works.smusers.db.mappers;
 
+import com.srivn.works.smusers.db.dto.personal.ContactInfo;
+import com.srivn.works.smusers.db.entity.personal.ContactInfoEn;
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,6 +19,6 @@ import com.srivn.works.smusers.util.AppC;
 public interface UserInfoMapper {
 
 	UserInfoMapper INSTANCE = Mappers.getMapper(UserInfoMapper.class);
-	
 
+	public ContactInfoEn DTOToEnContact(ContactInfo dto);
 }

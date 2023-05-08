@@ -37,7 +37,7 @@ public class GuardianService {
 		try {
 			if (userAdminService.getUserLoginRepo().checkUserEmail(gInfo.getUserEmail()) == 0) {
 				GuardianInfoEn en = cGuardianMapper.DTOToEn(gInfo);
-				UserLoginInfoEn ulEn = userAdminService.getLoginInfo(gInfo.getUserEmail());
+				UserLoginInfoEn ulEn = UserLoginInfoEn.createNew(gInfo.getUserEmail());
 				userAdminService.getDataTranService().addGDNDetailsAndLogin(en, ulEn);
 				return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
 						.message(AppMsg.Msg.MSG_ADD_001.getMsgP()).build();

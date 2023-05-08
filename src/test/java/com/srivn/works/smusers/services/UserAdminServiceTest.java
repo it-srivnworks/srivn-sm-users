@@ -108,15 +108,5 @@ class UserAdminServiceTest {
         verify(userLoginInfoRepo).checkUserEmail("not.present@example.org");
     }
 
-    @Test
-    void test_getLoginInfo() {
-        // Arrange
-        UserLoginInfoEn ulEn = userAdminService.getLoginInfo("jane.doe@example.org");
-        // Act and Assert
-        assertEquals("jane.doe@example.org", ulEn.getUserEmail());
-        assertEquals(12,ulEn.getUserPassword().length());
-        assertEquals(Timestamp.from(Instant.now()).getClass(),ulEn.getLastLogin().getClass());
-        assertEquals(AppC.Status.NEW.getCode(), ulEn.getCurrentStatus());
-    }
 }
 

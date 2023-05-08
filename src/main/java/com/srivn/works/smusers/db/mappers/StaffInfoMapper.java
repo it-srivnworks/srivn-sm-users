@@ -45,9 +45,5 @@ public interface StaffInfoMapper{
 	@Mapping(target="dept", source="dept", ignore = true)
 	@Mapping(target="title", ignore = true)
 	public StaffInfoEn DTOToUpdateEn(StaffInfo dto,@MappingTarget StaffInfoEn en);
-	
-	@Mapping(target="country",  ignore = true)
-	public AddressInfoEn DTOToEnAddress(AddressInfo dto);
 
-	public ContactInfoEn DTOToEnContact(ContactInfo dto);
 }

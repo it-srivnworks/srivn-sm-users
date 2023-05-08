@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class UserExceptionHandler{
 
 	@ExceptionHandler(value = {SMException.class})
-	public ResponseEntity<ExObject> handleDNFEx(SMException ex){
+	public ResponseEntity<ExObject> handleSMEx(SMException ex){
 		ExObject exObj = new ExObject();
 		exObj.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		exObj.setMessage(ex.getMessage());
 		return new ResponseEntity<ExObject>(exObj,HttpStatus.INTERNAL_SERVER_ERROR);
-		
-	} 
-	
+	}
 }

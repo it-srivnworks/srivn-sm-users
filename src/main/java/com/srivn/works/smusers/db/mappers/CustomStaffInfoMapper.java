@@ -45,13 +45,5 @@ public class CustomStaffInfoMapper {
 		en.setDept(clsnValRepo.findByValue(dto.getUserType()));
 		return enU;
 	}
-	
-	public AddressInfoEn DTOToEnAddress(AddressInfo dto) {
-		return  StaffInfoMapper.INSTANCE.DTOToEnAddress(dto);
-	}
 
-	public ContactInfoEn DTOToEnContact(ContactInfo dto) {
-		return  StaffInfoMapper.INSTANCE.DTOToEnContact(dto);
-	}
-	
 }

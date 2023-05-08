@@ -1,10 +1,13 @@
 package com.srivn.works.smusers.db.entity.users;
 
+import com.srivn.works.smusers.util.AppC;
+import com.srivn.works.smusers.util.AppUtil;
 import jakarta.persistence.Table;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.Instant;
 
 import com.srivn.works.smusers.db.entity.util.ClsnValEn;
 
@@ -53,4 +56,8 @@ public class UserLoginInfoEn implements Serializable{
 		this.currentStatus = currentStatus;
 	}
 
+	public static UserLoginInfoEn createNew(String userEmail){
+		UserLoginInfoEn ulEn = new UserLoginInfoEn(userEmail, AppUtil.generatePwd(), Timestamp.from(Instant.now()), AppC.Status.NEW.getCode());
+		return ulEn;
+	}
 }

@@ -20,9 +20,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.MockedStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
@@ -37,6 +37,7 @@ import static org.mockito.Mockito.spy;
 @ContextConfiguration(classes = {UserAdminService.class, GuardianService.class})
 @ActiveProfiles({"test"})
 @ExtendWith(SpringExtension.class)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GuardianServiceTest {
     /*********************Components*********************/
     @MockBean
@@ -65,6 +66,16 @@ class GuardianServiceTest {
     UserLoginInfoEn userLoginInfoEn;
     GuardianInfoEn guardianInfoEn01, guardianInfoEn02;
 
+    /*********************Others*********************/
+    private static MockedStatic<UserLoginInfoEn> mockedSettings;
+    @BeforeAll
+    static void atStart() {
+        mockedSettings = mockStatic(UserLoginInfoEn.class);
+    }
+    @AfterAll
+    static void atEnd() {
+        mockedSettings.close();
+    }
     @BeforeEach
     void init() {
         guardianInfo = new GuardianInfo("Jane", "Doe", "MALE", "1990-01-01", "STAFF", "jane.doe@example.org");
@@ -85,13 +96,12 @@ class GuardianServiceTest {
         //Arrange
         when(userAdminService.getUserLoginRepo().checkUserEmail(guardianInfo.getUserEmail())).thenReturn(0);
         when(cGuardianMapper.DTOToEn(guardianInfo)).thenReturn(guardianInfoEn01);
-        when(userAdminService.getLoginInfo(guardianInfo.getUserEmail())).thenReturn(userLoginInfoEn);
+        when(UserLoginInfoEn.createNew(guardianInfo.getUserEmail())).thenReturn(userLoginInfoEn);
         //Act
         SMMessage actual = guardianService.addNewGuardianInfo(guardianInfo);
         //Assert
         assertEquals("ADDED", actual.getAppCode());
         verify(cGuardianMapper, times(1)).DTOToEn(guardianInfo);
-        verify(userAdminService, times(1)).getLoginInfo(guardianInfo.getUserEmail());
         verify(userAdminService.getDataTranService(), times(1)).addGDNDetailsAndLogin(guardianInfoEn01, userLoginInfoEn);
 
     }
@@ -107,11 +117,10 @@ class GuardianServiceTest {
     }
 
     @Test
-    void test_addNewGuardianInfo_EX_UNKNOW() {
+    void test_addNewGuardianInfo_EX_UNKNOWN() {
         //Arrange
         when(userAdminService.getUserLoginRepo().checkUserEmail(guardianInfo.getUserEmail())).thenReturn(0);
-        when(cGuardianMapper.DTOToEn(guardianInfo)).thenReturn(guardianInfoEn01);
-        when(userAdminService.getLoginInfo(guardianInfo.getUserEmail())).thenThrow(new RuntimeException());
+        when(cGuardianMapper.DTOToEn(guardianInfo)).thenThrow(new RuntimeException());
         //Act
         SMException exception = assertThrows(SMException.class, () -> guardianService.addNewGuardianInfo(guardianInfo));
         //Assert
