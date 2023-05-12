@@ -2,10 +2,12 @@ package com.srivn.works.smusers.services;
 
 import com.srivn.works.smusers.db.dto.users.UserInfo;
 import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
+import com.srivn.works.smusers.db.entity.users.VerifTokenEn;
 import com.srivn.works.smusers.db.repo.personal.AddressInfoRepo;
 import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserLoginInfoRepo;
+import com.srivn.works.smusers.db.repo.users.VerifTokenRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
 import com.srivn.works.smusers.util.AppMsg;
@@ -17,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Getter
@@ -34,7 +37,10 @@ public class UserAdminService {
 
     private final ContactInfoRepo contactRepo;
 
+    private final VerifTokenRepo verifTokenRepo;
+
     private final DataTransactionService dataTranService;
+
 
     /* Heavy query due to JPA JOIN on all user child tables */
     public List<UserInfo> getUserInfoAll() {
@@ -63,4 +69,15 @@ public class UserAdminService {
             throw new SMException(AppMsg.Err.ERR_DNF_001.getCode(), AppMsg.Err.ERR_DNF_001.getMsgP("userEmail"));
         }
     }
+
+    public void createVerificationToken(UserLoginInfoEn userLoginInfoEn,String token) {
+        VerifTokenEn myToken = new VerifTokenEn(token, userLoginInfoEn);
+        verifTokenRepo.save(myToken);
+    }
+
+    public SMMessage confirmRegistration(Locale locale,String token){
+        return SMMessage.builder().appCode(AppMsg.Msg.MSG_EXIST_002.getCode())
+                .message(AppMsg.Msg.MSG_EXIST_002.getMsg()).build();
+    }
+
 }

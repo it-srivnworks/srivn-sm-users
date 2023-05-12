@@ -9,6 +9,9 @@ server:
 spring:
   profiles:
     active: test
+sm-users:
+  gcp:
+    topic: srivn-sm-sendemail
 ---
 spring:
   config:
@@ -40,6 +43,11 @@ spring:
   config:
     activate:
       on-profile: test    
+  cloud:
+    gcp:
+      project-id: srivnworks-sm-project
+      credentials:
+        location: file:./keys/sa-srivn-sm-apps-KEY.json
   datasource:
     url: jdbc:h2:file:./data/demo
     username: sa
@@ -83,4 +91,5 @@ jwt:
 smaster:
   home:
     profilepicpath: C:\HiteshWork\SRIVN_WORKS\Dev\testdata\
-    profPicFileSize: 2097152 
+    profPicFileSize: 2097152
+

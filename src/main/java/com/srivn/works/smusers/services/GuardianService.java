@@ -1,5 +1,6 @@
 package com.srivn.works.smusers.services;
 
+import com.srivn.works.smusers.appevents.OnUserRegistrationEvent;
 import com.srivn.works.smusers.db.dto.users.GuardianInfo;
 import com.srivn.works.smusers.db.entity.users.GuardianInfoEn;
 import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
@@ -11,6 +12,7 @@ import com.srivn.works.smusers.util.AppMsg;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -27,7 +29,7 @@ public class GuardianService {
 	private final UserAdminService userAdminService;
 	private final GuardianInfoRepo guardianRepo;
 	private final CustomGuardianInfoMapper cGuardianMapper;
-
+	private final ApplicationEventPublisher eventPublisher;
 	/*
 	 * GUARDIAN INFO
 	 */
@@ -37,6 +39,9 @@ public class GuardianService {
 				GuardianInfoEn en = cGuardianMapper.DTOToEn(gInfo);
 				UserLoginInfoEn ulEn = UserLoginInfoEn.createNew(gInfo.getUserEmail());
 				userAdminService.getDataTranService().addGDNDetailsAndLogin(en, ulEn);
+
+				eventPublisher.publishEvent(new OnUserRegistrationEvent(ulEn));
+
 				return SMMessage.builder().appCode(AppMsg.Msg.MSG_ADD_001.getCode())
 						.message(AppMsg.Msg.MSG_ADD_001.getMsgP()).build();
 			} else {

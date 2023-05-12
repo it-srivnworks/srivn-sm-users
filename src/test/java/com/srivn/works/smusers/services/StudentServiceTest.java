@@ -18,6 +18,7 @@ import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
 import com.srivn.works.smusers.db.repo.users.StudentInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserLoginInfoRepo;
+import com.srivn.works.smusers.db.repo.users.VerifTokenRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
 import org.junit.jupiter.api.AfterAll;
@@ -55,9 +56,12 @@ class StudentServiceTest {
     @MockBean
     private ContactInfoRepo contactRepo;
     @MockBean
+    private VerifTokenRepo verifTokenRepo;
+    @MockBean
     private DataTransactionService dataTranService;
     //TBI
     private UserAdminService userAdminService;
+    /*********************Custom*********************/
     //TBI
     private PersonalInfoService piService;
     //
@@ -123,7 +127,7 @@ class StudentServiceTest {
         userLoginInfoEn = new UserLoginInfoEn("jane.doe@example.org", "iloveyou", mock(Timestamp.class), 1);
         //Services
         piService = spy(new PersonalInfoService(addressRepo, contactRepo, cPersonalInfoMapper));
-        userAdminService = spy(new UserAdminService(userRepo, userLoginRepo, addressRepo, contactRepo, dataTranService));
+        userAdminService = spy(new UserAdminService(userRepo, userLoginRepo, addressRepo, contactRepo, verifTokenRepo, dataTranService));
         studentService = spy(new StudentService(userAdminService, piService, studentRepo, cStudentMapper));
     }
 

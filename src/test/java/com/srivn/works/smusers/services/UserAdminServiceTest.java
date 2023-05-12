@@ -9,6 +9,7 @@ import com.srivn.works.smusers.db.repo.personal.AddressInfoRepo;
 import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserLoginInfoRepo;
+import com.srivn.works.smusers.db.repo.users.VerifTokenRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
 import com.srivn.works.smusers.util.AppMsg;
@@ -42,6 +43,8 @@ class UserAdminServiceTest {
     @MockBean
     private ContactInfoRepo contactInfoRepo;
     @MockBean
+    private VerifTokenRepo verifTokenRepo;
+    @MockBean
     private DataTransactionService dataTransactionService;
 
     private UserAdminService userAdminService;
@@ -60,7 +63,7 @@ class UserAdminServiceTest {
         userInfoEn01 = new GuardianInfoEn("Jane", "Doe", gender, userDOB, userType, "jane.doe@example.org");
         userInfoEn02 = new GuardianInfoEn("Jenny", "Doe", gender, userDOB, userType, "jenny.doe@example.org");
         //
-        userAdminService = spy(new UserAdminService(userInfoRepo, userLoginInfoRepo, addressInfoRepo, contactInfoRepo, dataTransactionService));
+        userAdminService = spy(new UserAdminService(userInfoRepo, userLoginInfoRepo, addressInfoRepo, contactInfoRepo, verifTokenRepo ,dataTransactionService));
     }
 
 

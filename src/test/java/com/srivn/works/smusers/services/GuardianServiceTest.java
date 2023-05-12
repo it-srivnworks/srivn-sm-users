@@ -11,6 +11,7 @@ import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
 import com.srivn.works.smusers.db.repo.users.GuardianInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserLoginInfoRepo;
+import com.srivn.works.smusers.db.repo.users.VerifTokenRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
 import org.junit.jupiter.api.AfterAll;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockedStatic;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -47,12 +49,17 @@ class GuardianServiceTest {
     @MockBean
     private ContactInfoRepo contactInfoRepo;
     @MockBean
+    private VerifTokenRepo verifTokenRepo;
+    @MockBean
     private DataTransactionService dataTransactionService;
     private UserAdminService userAdminService;
+    /*********************Custom*********************/
     @MockBean
     private GuardianInfoRepo guardianRepo;
     @MockBean
     private CustomGuardianInfoMapper cGuardianMapper;
+    @MockBean
+    private ApplicationEventPublisher eventPublisher;
     GuardianService guardianService;
 
     /*********************Data*********************/
@@ -84,8 +91,8 @@ class GuardianServiceTest {
         guardianInfoEn02 = new GuardianInfoEn("Jenny", "Doe", gender, userDOB, userType, "jenny.doe@example.org");
         userLoginInfoEn = new UserLoginInfoEn("jane.doe@example.org", "iloveyou", mock(Timestamp.class), 1);
         //
-        userAdminService = spy(new UserAdminService(userInfoRepo, userLoginInfoRepo, addressInfoRepo, contactInfoRepo, dataTransactionService));
-        guardianService = spy(new GuardianService(userAdminService, guardianRepo, cGuardianMapper));
+        userAdminService = spy(new UserAdminService(userInfoRepo, userLoginInfoRepo, addressInfoRepo, contactInfoRepo,verifTokenRepo, dataTransactionService));
+        guardianService = spy(new GuardianService(userAdminService, guardianRepo, cGuardianMapper,eventPublisher));
 
     }
 

@@ -16,6 +16,7 @@ import com.srivn.works.smusers.db.repo.personal.ContactInfoRepo;
 import com.srivn.works.smusers.db.repo.users.StaffInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserInfoRepo;
 import com.srivn.works.smusers.db.repo.users.UserLoginInfoRepo;
+import com.srivn.works.smusers.db.repo.users.VerifTokenRepo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
 import org.junit.jupiter.api.AfterAll;
@@ -52,8 +53,11 @@ class StaffServiceTest {
     @MockBean
     private ContactInfoRepo contactInfoRepo;
     @MockBean
+    private VerifTokenRepo verifTokenRepo;
+    @MockBean
     private DataTransactionService dataTransactionService;
     private UserAdminService userAdminService;
+    /*********************Custom*********************/
     private PersonalInfoService piService;
 
     @MockBean
@@ -112,7 +116,7 @@ class StaffServiceTest {
         userLoginInfoEn = new UserLoginInfoEn("jane.doe@example.org", "iloveyou", mock(Timestamp.class), 1);
 
         piService = spy(new PersonalInfoService(addressInfoRepo,contactInfoRepo,cPersonalInfoMapper));
-        userAdminService = spy(new UserAdminService(userInfoRepo, userLoginInfoRepo, addressInfoRepo, contactInfoRepo, dataTransactionService));
+        userAdminService = spy(new UserAdminService(userInfoRepo, userLoginInfoRepo, addressInfoRepo, contactInfoRepo, verifTokenRepo, dataTransactionService));
         staffService = spy(new StaffService(userAdminService, piService, staffRepo, cStaffMapper));
     }
 
