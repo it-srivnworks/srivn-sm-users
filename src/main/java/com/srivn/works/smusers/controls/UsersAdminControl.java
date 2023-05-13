@@ -30,5 +30,6 @@ public class UsersAdminControl {
     public ResponseEntity<SMMessage> confirmRegistration(WebRequest request, @RequestParam("token") String token) {
         return new ResponseEntity<>(userAdminService.confirmRegistration(request.getLocale(), token), HttpStatus.OK);
     }
+
 }
 

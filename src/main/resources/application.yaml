@@ -88,6 +88,10 @@ spring:
             factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
 jwt:
   secret : smusers
+sm-users:
+  secret:
+    key : smuserskey
+  url : https://localhost/sm-users
 smaster:
   home:
     profilepicpath: C:\HiteshWork\SRIVN_WORKS\Dev\testdata\

@@ -1,10 +1,18 @@
 package com.srivn.works.smusers.db.entity.users;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+@ToString
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class VerifTokenEn {
     private static final int EXPIRATION = 60 * 24;

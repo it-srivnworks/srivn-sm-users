@@ -23,8 +23,8 @@ public class GcpPubSubConfig {
     @Bean
     @ServiceActivator(inputChannel = "pubsubOutputChannel")
     public MessageHandler messageSender(PubSubTemplate pubsubTemplate) {
-        PubSubMessageHandler adapter = new PubSubMessageHandler(pubsubTemplate, topic);
-        adapter.setSuccessCallback(((ackId, message) -> log.info("Message was sent via the outbound channel adapter to ackId : "+ackId+" topic :"+topic)));
+        PubSubMessageHandler adapter = new PubSubMessageHandler(pubsubTemplate, this.topic);
+        adapter.setSuccessCallback(((ackId, message) -> log.info("Message was sent via the outbound channel adapter to ackId : "+ackId+" topic :"+this.topic)));
         adapter.setFailureCallback((cause, message) -> log.info("Error sending " + message + " due to " + cause));
         return adapter;
     }

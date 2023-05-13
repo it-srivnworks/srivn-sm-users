@@ -7,7 +7,10 @@ public class AppMsg {
 	public enum Err {
 		ERR_UKN_000("UNKNOWN", "Unknown Error, Please Try Again!"), 
 		ERR_DNF_001("DNF", "%s not found"),
-		ERR_DUP_002("DUP", "%s already present.");
+		ERR_DUP_002("DUP", "%s already present."),
+		ERR_AUTH_0031("DUP", "%s Unable to get JWT Token !."),
+		ERR_AUTH_0032("DUP", "%s JWT Token has expired !."),
+		ERR_AUTH_0033("DUP", "%s Bad Request !.");
 
 		private final String code;
 		private final String msg;
@@ -36,7 +39,8 @@ public class AppMsg {
 		MSG_ADD_001("ADDED", "Added %s succesfully"),
 		MSG_EXIST_002("EXIST", "Data %s Exist"),
 		MSG_UPDATE_003("UPDATED", "Updated %s succesfully"),
-		MSG_DELETE_004("DELETED", "Deleted %s succesfully");
+		MSG_DELETE_004("DELETED", "Deleted %s succesfully"),
+		MSG_ACTIVATED_005("ACTIVATED", "User %s Activated");
 		
 		private final String code;
 		private final String msg;
