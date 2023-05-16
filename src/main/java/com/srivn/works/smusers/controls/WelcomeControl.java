@@ -24,7 +24,6 @@ public class WelcomeControl {
 
 	@GetMapping("/tester/pubsub")
 	public ResponseEntity<?> testerPubSub(@RequestParam String message) {
-		System.out.println("testerPubSub");
 		messagingGateway.sendToPubsub(message);
 		return new ResponseEntity<>("Howdy!!", HttpStatus.OK);
 	}

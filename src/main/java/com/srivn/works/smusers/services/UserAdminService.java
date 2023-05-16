@@ -46,9 +46,9 @@ public class UserAdminService {
     private final VerifTokenRepo verifTokenRepo;
 
     private final DataTransactionService dataTranService;
-
     @Value("${sm-users.secret.key}")
     private String secretKey;
+
 
     /* Heavy query due to JPA JOIN on all user child tables */
     public List<UserInfo> getUserInfoAll() {
@@ -78,8 +78,7 @@ public class UserAdminService {
         }
     }
 
-    public UserDetails loadUserByUsername(String userEmail) {
-
+    public UserDetails loadUserByUserName(String userEmail) {
         UserLoginInfoEn ulEn = userLoginRepo.findByUserEmail(userEmail);
         if (ulEn != null) {
             return new User(ulEn.getUserEmail(), ulEn.getUserPassword(), new ArrayList<>());
@@ -96,7 +95,8 @@ public class UserAdminService {
     }
 
     public SMMessage confirmRegistration(Locale locale, String token) {
-        String userEmail = AppUtil.decryptToken(AppUtil.convertHexToString(token), this.secretKey);
+        //String userEmail = AppUtil.decryptToken(AppUtil.convertHexToString(token), this.secretKey);
+        String userEmail ="sdsdsd";
         UserLoginInfoEn ulEn = userLoginRepo.findByUserEmail(userEmail);
         VerifTokenEn verifTokenEn = verifTokenRepo.findByUser(ulEn);
         if(verifTokenEn.getToken().equals(token)){

@@ -1,5 +1,7 @@
 package com.srivn.works.smusers.controls;
 
+import com.srivn.works.smusers.config.jwt.JwtRequestFilter;
+import com.srivn.works.smusers.config.jwt.JwtTokenUtil;
 import com.srivn.works.smusers.db.dto.users.GuardianInfo;
 import com.srivn.works.smusers.exception.SMException;
 import com.srivn.works.smusers.exception.SMMessage;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -30,7 +33,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles({"test"})
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(GuardianInfoControl.class)
+@AutoConfigureMockMvc(addFilters = false)
 class GuardianInfoControlTest {
+
+    @MockBean
+    JwtTokenUtil jwtTokenUtil;
+
+    @MockBean
+    JwtRequestFilter jwtRequestFilter;
 
     @MockBean
     GuardianService guardianService;

@@ -31,10 +31,10 @@ public class AppCustomEventListener{
     @Async
     @EventListener
     public void registrationListener(OnUserRegistrationEvent event) throws Exception {
-        System.out.println("registrationListener      : Source : "+event.getSource().getClass().getName());
+        log.info("registrationListener      : Source : "+event.getSource().getClass().getName());
         //Thread.sleep(5000);
         this.confirmRegistration(event);
-        System.out.println("registrationListener      : completed");
+        log.info("registrationListener      : completed");
     }
 
     private void confirmRegistration(OnUserRegistrationEvent event) {

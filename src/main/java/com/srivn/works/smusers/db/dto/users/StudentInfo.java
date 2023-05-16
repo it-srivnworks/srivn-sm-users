@@ -4,6 +4,7 @@ import com.srivn.works.smusers.db.dto.personal.AddressInfo;
 import com.srivn.works.smusers.db.dto.personal.ContactInfo;
 import com.srivn.works.smusers.db.dto.personal.HealthInfo;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -23,6 +24,9 @@ public class StudentInfo extends UserInfo {
     private String pguardian;
 
     private String sguardian;
+
+    public StudentInfo() {super();
+    }
 
     public StudentInfo(String firstName, String lastName, String gender, String userDOB, String userType, String userEmail, String pguardian, String sguardian) {
         super(firstName, lastName, gender, userDOB, userType, userEmail);
