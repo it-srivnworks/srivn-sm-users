@@ -23,7 +23,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -95,15 +97,19 @@ public class UserAdminService {
     }
 
     public SMMessage confirmRegistration(Locale locale, String token) {
-        //String userEmail = AppUtil.decryptToken(AppUtil.convertHexToString(token), this.secretKey);
-        String userEmail ="sdsdsd";
+        String userEmail = AppUtil.decryptToken(AppUtil.convertHexToString(token), this.secretKey);
         UserLoginInfoEn ulEn = userLoginRepo.findByUserEmail(userEmail);
         VerifTokenEn verifTokenEn = verifTokenRepo.findByUser(ulEn);
         if(verifTokenEn.getToken().equals(token)){
-            ulEn.setCurrentStatus(AppC.Status.NEW.getCode());
-            userLoginRepo.save(ulEn);
-            return SMMessage.builder().appCode(AppMsg.Msg.MSG_ACTIVATED_005.getCode())
-                    .message(AppMsg.Msg.MSG_ACTIVATED_005.getMsgP(userEmail)).build();
+            if(verifTokenEn.getExpiryDate().before(new Date())){
+                return SMMessage.builder().appCode(AppMsg.Err.ERR_EXPR_004.getCode())
+                        .message(AppMsg.Err.ERR_EXPR_004.getMsgP("Token Date ")).build();
+            }else{
+                ulEn.setCurrentStatus(AppC.Status.NEW.getCode());
+                userLoginRepo.save(ulEn);
+                return SMMessage.builder().appCode(AppMsg.Msg.MSG_ACTIVATED_005.getCode())
+                        .message(AppMsg.Msg.MSG_ACTIVATED_005.getMsgP(userEmail)).build();
+            }
         }else{
             return SMMessage.builder().appCode(AppMsg.Err.ERR_DNF_001.getCode())
                     .message(AppMsg.Err.ERR_DNF_001.getMsg()).build();

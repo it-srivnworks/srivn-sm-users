@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -22,20 +21,43 @@ public class SecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
+    private static final String[] AUTH_WHITELIST = {
+            // -- Swagger UI v2
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            // other public endpoints
+            "/h2-console/**",
+    };
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().requestMatchers("/sm-users/**").permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/swagger-ui/**").permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/h2-console/**").permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/v3/api-docs/**").permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/welcome/**").permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/users/**").permitAll();
-        //To allow post Request
-        http.csrf().disable();
-      /*  http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);*/
-        return http.build();
+        return http.authorizeHttpRequests()
+                .requestMatchers(AntPathRequestMatcher.antMatcher ("/swagger-ui/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher ("/v3/api-docs/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher ("/h2-console/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher ("/welcome/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher ("/users/**")).permitAll()
+                .and()
+                .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui/**"))
+                .and()
+                .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/v3/api-docs/**"))
+                .and()
+                .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+                .and()
+                .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/welcome/**"))
+                .and()
+                .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/users/**"))
+                .and()
+                .headers(headers -> headers.frameOptions().sameOrigin())
+                .build();
     }
 }

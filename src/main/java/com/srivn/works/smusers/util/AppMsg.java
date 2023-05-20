@@ -10,7 +10,8 @@ public class AppMsg {
 		ERR_DUP_002("DUP", "%s already present."),
 		ERR_AUTH_0031("DUP", "%s Unable to get JWT Token !."),
 		ERR_AUTH_0032("DUP", "%s JWT Token has expired !."),
-		ERR_AUTH_0033("DUP", "%s Bad Request !.");
+		ERR_AUTH_0033("DUP", "%s Bad Request !."),
+		ERR_EXPR_004("EXPIRED", "%s expired");
 
 		private final String code;
 		private final String msg;
