@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher ("/v3/api-docs/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher ("/h2-console/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher ("/welcome/**")).permitAll()
-                .requestMatchers(AntPathRequestMatcher.antMatcher ("/users/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher ("/users/adm/**")).permitAll()
                 .and()
                 .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui/**"))
                 .and()
@@ -55,8 +55,11 @@ public class SecurityConfig {
                 .and()
                 .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/welcome/**"))
                 .and()
-                .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/users/**"))
+                .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/users/adm/**"))
                 .and()
+                .csrf().ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/users/**/ADD"))
+                .and()
+                // all other requests need to be authenticated
                 .headers(headers -> headers.frameOptions().sameOrigin())
                 .build();
     }

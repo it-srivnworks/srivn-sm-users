@@ -1,6 +1,8 @@
 package com.srivn.works.smusers.services;
 
+import com.srivn.works.smusers.config.jwt.JwtTokenUtil;
 import com.srivn.works.smusers.db.dto.users.UserInfo;
+import com.srivn.works.smusers.db.dto.users.UserLoginInfo;
 import com.srivn.works.smusers.db.entity.users.UserLoginInfoEn;
 import com.srivn.works.smusers.db.entity.users.VerifTokenEn;
 import com.srivn.works.smusers.db.repo.personal.AddressInfoRepo;
@@ -48,6 +50,8 @@ public class UserAdminService {
     private final VerifTokenRepo verifTokenRepo;
 
     private final DataTransactionService dataTranService;
+
+    private final JwtTokenUtil jwtTokenUtil;
     @Value("${sm-users.secret.key}")
     private String secretKey;
 
@@ -64,8 +68,7 @@ public class UserAdminService {
 
     public SMMessage checkIfEmailExist(String userEmail) {
         if (userLoginRepo.checkUserEmail(userEmail) > 0) {
-            return SMMessage.builder().appCode(AppMsg.Msg.MSG_EXIST_002.getCode())
-                    .message(AppMsg.Msg.MSG_EXIST_002.getMsg()).build();
+            return SMMessage.builder().appCode(AppMsg.Msg.MSG_EXIST_002.getCode()).message(AppMsg.Msg.MSG_EXIST_002.getMsg()).build();
         } else {
             throw new SMException(AppMsg.Err.ERR_DNF_001.getCode(), AppMsg.Err.ERR_DNF_001.getMsgP("userEmail"));
         }
@@ -90,29 +93,41 @@ public class UserAdminService {
     }
 
     public String createVerificationToken(UserLoginInfoEn userLoginInfoEn) {
-        final String token = AppUtil.convertStringToHex(AppUtil.encryptToken(userLoginInfoEn.getUserEmail() , this.secretKey));
+        final String token = AppUtil.convertStringToHex(AppUtil.encryptToken(userLoginInfoEn.getUserEmail(), this.secretKey));
         VerifTokenEn myToken = new VerifTokenEn(token, userLoginInfoEn);
         verifTokenRepo.save(myToken);
         return token;
+    }
+
+    public UserLoginInfo authenticateUser(UserLoginInfo uLInfo) {
+        UserLoginInfoEn ulEn = userLoginRepo.findByUserEmail(uLInfo.getEmail());
+        if (ulEn == null)
+            throw new SMException(AppMsg.Err.ERR_DNF_001.getCode(), AppMsg.Err.ERR_DNF_001.getMsgP("userEmail"));
+        if (!uLInfo.getPassword().equals(ulEn.getUserPassword()))
+            throw new SMException(AppMsg.Err.ERR_AUTH_0034.getCode(), AppMsg.Err.ERR_AUTH_0034.getMsgP("userEmail"));
+        if (ulEn.getCurrentStatus() != AppC.Status.ACTIVE.getCode()){
+            throw new SMException(AppMsg.Err.ERR_INACTIVE_0035.getCode(), AppMsg.Err.ERR_INACTIVE_0035.getMsgP(ulEn.getUserEmail()));
+        } else {
+            User jwtUser = new User(ulEn.getUserEmail(), ulEn.getUserPassword(), new ArrayList<>());
+            final String token = jwtTokenUtil.generateToken(jwtUser);
+            return UserLoginInfo.builder().email(ulEn.getUserEmail()).token(token).build();
+        }
     }
 
     public SMMessage confirmRegistration(Locale locale, String token) {
         String userEmail = AppUtil.decryptToken(AppUtil.convertHexToString(token), this.secretKey);
         UserLoginInfoEn ulEn = userLoginRepo.findByUserEmail(userEmail);
         VerifTokenEn verifTokenEn = verifTokenRepo.findByUser(ulEn);
-        if(verifTokenEn.getToken().equals(token)){
-            if(verifTokenEn.getExpiryDate().before(new Date())){
-                return SMMessage.builder().appCode(AppMsg.Err.ERR_EXPR_004.getCode())
-                        .message(AppMsg.Err.ERR_EXPR_004.getMsgP("Token Date ")).build();
-            }else{
-                ulEn.setCurrentStatus(AppC.Status.NEW.getCode());
+        if (verifTokenEn.getToken().equals(token)) {
+            if (!verifTokenEn.getExpiryDate().before(new Date())) {
+                ulEn.setCurrentStatus(AppC.Status.ACTIVE.getCode());
                 userLoginRepo.save(ulEn);
-                return SMMessage.builder().appCode(AppMsg.Msg.MSG_ACTIVATED_005.getCode())
-                        .message(AppMsg.Msg.MSG_ACTIVATED_005.getMsgP(userEmail)).build();
+                return SMMessage.builder().appCode(AppMsg.Msg.MSG_ACTIVATED_005.getCode()).message(AppMsg.Msg.MSG_ACTIVATED_005.getMsgP(userEmail)).build();
+            } else {
+                throw new SMException(AppMsg.Err.ERR_EXPR_004.getCode(), AppMsg.Err.ERR_EXPR_004.getMsgP("userEmail"));
             }
-        }else{
-            return SMMessage.builder().appCode(AppMsg.Err.ERR_DNF_001.getCode())
-                    .message(AppMsg.Err.ERR_DNF_001.getMsg()).build();
+        } else {
+            return SMMessage.builder().appCode(AppMsg.Err.ERR_DNF_001.getCode()).message(AppMsg.Err.ERR_DNF_001.getMsg()).build();
         }
     }
 
